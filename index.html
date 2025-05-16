@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BieggerM</title>
-    <!-- Add Pico.css CDN -->
+    <!-- Add Pico.css CDN, but disabled by default -->
     <link
+      id="pico-css"
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css"
+      disabled
     />
     <style>
       body {
@@ -31,32 +33,7 @@
       .contact-links a {
         margin-right: 1rem;
       }
-      .theme-toggle {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 1rem;
-      }
     </style>
-    <script>
-      // Pico.css theme toggle
-      function toggleTheme() {
-        const html = document.documentElement;
-        if (html.getAttribute("data-theme") === "dark") {
-          html.setAttribute("data-theme", "light");
-          localStorage.setItem("theme", "light");
-        } else {
-          html.setAttribute("data-theme", "dark");
-          localStorage.setItem("theme", "dark");
-        }
-      }
-      // On load, set theme from localStorage
-      window.addEventListener("DOMContentLoaded", () => {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-          document.documentElement.setAttribute("data-theme", savedTheme);
-        }
-      });
-    </script>
   </head>
 
   <body>
@@ -84,7 +61,7 @@
       </section>
 
       <section>
-        <h1>Experience</h2>
+        <h2>Experience</h2>
         <ul>
           <li>
             <strong>System Engineer - DevOps at Vetter Pharma</strong> <br />
@@ -150,7 +127,6 @@
         </ul>
       </section>
 
-
       <section>
         <h2>Contact</h2>
         <div class="contact-links">
@@ -164,26 +140,54 @@
         <p style="margin: 0;">&copy; 2025 Marius Biegger</p>
         <button
           type="button"
-          onclick="toggleTheme()"
-          aria-label="Toggle dark/light mode"
+          onclick="togglePico()"
+          aria-label="Toggle Pico.css"
+          id="pico-toggle-btn"
           style="
             background: none;
             border: none;
-            color: var(--muted-color, #888);
-            font-size: 1.2rem;
-            padding: 0;
-            margin-left: 0.5rem;
+            padding: 0 0 0 0.5rem;
             vertical-align: middle;
             cursor: pointer;
             opacity: 0.5;
             transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
           "
           onmouseover="this.style.opacity='1'"
           onmouseout="this.style.opacity='0.5'"
         >
-          🌓
+          <img
+            id="pico-logo"
+            src="media/pico-logo-light-I3BYP3V5.png"
+            alt="Toggle Pico.css"
+            style="height: 1.5em; width: auto; display: block;"
+          />
         </button>
       </footer>
     </main>
+    <script>
+      // Pico.css toggle
+      function togglePico() {
+        const pico = document.getElementById('pico-css');
+        const logo = document.getElementById('pico-logo');
+        pico.disabled = !pico.disabled;
+        if (pico.disabled) {
+          logo.src = "media/pico-logo-light-I3BYP3V5.png";
+        } else {
+          logo.src = "media/pico-logo-dark-XCR6IJWC.svg";
+        }
+      }
+      // Ensure correct logo on page load
+      window.addEventListener('DOMContentLoaded', () => {
+        const pico = document.getElementById('pico-css');
+        const logo = document.getElementById('pico-logo');
+        if (pico && logo) {
+          logo.src = pico.disabled
+            ? "media/pico-logo-light-I3BYP3V5.png"
+            : "media/pico-logo-dark-XCR6IJWC.svg";
+        }
+      });
+    </script>
   </body>
 </html>
