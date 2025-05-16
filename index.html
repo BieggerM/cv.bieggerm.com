@@ -1,59 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BieggerM</title>
-</head>
-<body>
-    <h1>Marius Biegger</h1>
-    <p>System Engineer</p>
+    <!-- Add Pico.css CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css"
+    />
+    <style>
+      body {
+        max-width: 700px;
+        margin: 2rem auto;
+      }
+      .profile-img {
+        display: block;
+        margin: 0 auto 1rem auto;
+        border-radius: 50%;
+        max-width: 160px;
+      }
+      h1,
+      h2,
+      h3 {
+        text-align: center;
+      }
+      ul {
+        margin-bottom: 2rem;
+      }
+      .contact-links a {
+        margin-right: 1rem;
+      }
+      .theme-toggle {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
+      }
+    </style>
+    <script>
+      // Pico.css theme toggle
+      function toggleTheme() {
+        const html = document.documentElement;
+        if (html.getAttribute("data-theme") === "dark") {
+          html.setAttribute("data-theme", "light");
+          localStorage.setItem("theme", "light");
+        } else {
+          html.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+        }
+      }
+      // On load, set theme from localStorage
+      window.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          document.documentElement.setAttribute("data-theme", savedTheme);
+        }
+      });
+    </script>
+  </head>
 
-    <h2>About Me</h2>
-    <p>A highly motivated and results-oriented system engineer with over 5 years of experience in designing, implementing, and maintaining robust and scalable IT infrastructure. I possess a strong understanding of Linux systems, network protocols, and cloud technologies. I am passionate about automation and improving system efficiency through scripting and infrastructure-as-code principles.</p>
+  <body>
+    <main>
+      <img
+        src="media/caricature.png"
+        alt="AI generated caricature"
+        class="profile-img"
+      />
+      <h1>Marius Biegger</h1>
+      <p class="secondary" style="text-align: center; font-weight: bold">
+        System Engineer
+      </p>
 
-    <h2>Skills</h2>
-    <ul>
-        <li>Linux Server Administration (Ubuntu, CentOS, Debian)</li>
-        <li>Network Configuration (TCP/IP, DNS, DHCP, VLANs)</li>
-        <li>Scripting (Bash, Python)</li>
-        <li>Cloud Platforms (AWS: EC2, S3, IAM; Azure: Virtual Machines, Blob Storage, Azure AD)</li>
-        <li>Automation Tools (Ansible, Terraform)</li>
-        <li>Monitoring Tools (Prometheus, Grafana, Nagios)</li>
-        <li>Containerization (Docker, Kubernetes - basic understanding)</li>
-        <li>Security Best Practices</li>
-    </ul>
-    <h2>Education</h2>
-    <ul>
-        <li>
-            <h3>Master Cloud Applications & Security Engineering</h3>
-            <p>Technische Hochschule Ingolstadt</p>
-            </li>
-        <li>
-            <h3>Bachelor Wirtschaftsinformatik</h3>
-            <p>DHBW Ravensburg</p>
-        </li>
+      <section>
+        <h2>About Me</h2>
+        <p>
+          A highly motivated and results-oriented system engineer with over 5
+          years of experience in designing, implementing, and maintaining robust
+          and scalable IT infrastructure. I possess a strong understanding of
+          Linux systems, network protocols, and cloud technologies. I am
+          passionate about automation and improving system efficiency through
+          scripting and infrastructure-as-code principles.
+        </p>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <ul>
+          <li>Linux Server Administration (Debian, SUSE)</li>
+          <li>Network Configuration (TCP/IP, DNS, DHCP, VLANs)</li>
+          <li>Scripting (Bash, Python)</li>
+          <li>Cloud Platforms (AWS, Azure)</li>
+          <li>Automation Tools (Ansible, Terraform)</li>
+          <li>Monitoring Tools (Prometheus, Grafana, Nagios)</li>
+          <li>Containerization (Docker, Kubernetes - basic understanding)</li>
+          <li>Security Best Practices</li>
         </ul>
+      </section>
 
-    <h2>Experience</h2>
-    <ul>
-        <li>
-            <h3>System Engineer - DevOps at Vetter Pharma</h3>
-            <p>2022 - 2024</p>
-            <p>Responsible for automating and maintaining the company's Linux-based server infrastructure and cloud environments (Azure). Led the implementation of automation initiatives and played a key role in improving system security and reliability.</p>
-        </li>
-        <li>
-            <h3>Cloud Operations Engineer at Liebherr Digital Development Center</h3>
-            <p>2021 - 2022</p>
-            <p>Contributed to the design and deployment of new IT infrastructure projects. Provided technical support and troubleshooting for system-related issues. Gained experience in managing both on-premises and cloud resources.</p>
-        </li>
+      <section>
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <strong>Master Cloud Applications & Security Engineering</strong
+            ><br />
+            <span>Technische Hochschule Ingolstadt</span>
+          </li>
+          <li>
+            <strong>Bachelor Wirtschaftsinformatik</strong><br />
+            <span>DHBW Ravensburg</span>
+          </li>
         </ul>
+      </section>
 
-    <h2>Contact</h2>
-    <p>Email: <a href="biegger.marius@gmail.com">biegger.marius@gmail.com</a></p>
-    <p>LinkedIn: <a href="linkedin.com/BieggerM">LinkedIn Profile</a></p>
-    <p>GitHub: <a href="github.com/Bieggerm">GitHub Profile</a></p>
-    <hr>
-    <p>&copy; 2025 Marius Biegger</p>
-</body>
+      <section>
+        <h2>Experience</h2>
+        <ul>
+          <li>
+            <strong>System Engineer - DevOps at Vetter Pharma</strong> <br />
+            <small>2022 - 2024</small>
+            <p>
+              Responsible for automating and maintaining the company's
+              Linux-based server infrastructure and cloud environments (Azure).
+              Led the implementation of automation initiatives and played a key
+              role in improving system security and reliability.
+            </p>
+          </li>
+          <li>
+            <strong
+              >Cloud Operations Engineer at Liebherr Digital Development
+              Center</strong
+            >
+            <br />
+            <small>2021 - 2022</small>
+            <p>
+              Contributed to the design and deployment of new IT infrastructure
+              projects. Provided technical support and troubleshooting for
+              system-related issues. Gained experience in managing both
+              on-premises and cloud resources.
+            </p>
+          </li>
+          <li>
+            <strong>Softwaredeveloper at Ametras metals GmbH</strong> <br />
+            <small>2018 - 2021</small>
+            <p>
+              Contributed to a Softwareproject for an ERP-System written in
+              Java. Gained my first experiences working in a technical
+              envirponment.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <div class="contact-links">
+          <a href="mailto:biegger.marius@gmail.com">Email</a>
+          <a href="https://linkedin.com/BieggerM" target="_blank">LinkedIn</a>
+          <a href="https://github.com/Bieggerm" target="_blank">GitHub</a>
+        </div>
+      </section>
+      <hr />
+      <footer style="display: flex; justify-content: space-between; align-items: center;">
+        <p style="margin: 0;">&copy; 2025 Marius Biegger</p>
+        <button
+          type="button"
+          onclick="toggleTheme()"
+          aria-label="Toggle dark/light mode"
+          style="
+            background: none;
+            border: none;
+            color: var(--muted-color, #888);
+            font-size: 1.2rem;
+            padding: 0;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+          "
+          onmouseover="this.style.opacity='1'"
+          onmouseout="this.style.opacity='0.5'"
+        >
+          🌓
+        </button>
+      </footer>
+    </main>
+  </body>
 </html>
