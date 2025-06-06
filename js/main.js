@@ -34,13 +34,16 @@ function init() {
     term.initViewportHandler();
 
     const welcomeMessage = [
-        "Welcome to my interactive terminal portfolio.",
-        "Type 'help' for a list of commands to get started.",
-        " ",
-        "Example: try typing 'help' or 'ls'."
+        { text: "Welcome to my interactive terminal portfolio." },
+        { text: "Type 'help' for a list of commands to get started." },
+        { text: " " },
+        { html: `Not a techie? <a href="cv.html" target="_blank" style="color: #9ece6a; text-decoration: underline;">Click here for my CV</a>.` },
+        { text: " " },
+        { text: "Example: try typing 'help' or 'about'." }
     ];
 
-    const welcomeData = welcomeMessage.map(line => ({ text: line }));
+    // Ensure all lines are objects, either {text: ...} or {html: ...}
+    const welcomeData = welcomeMessage.map(line => (typeof line === 'string' ? { text: line } : line));
     term.print(welcomeData);
     term.showPrompt(state);
 }

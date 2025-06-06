@@ -28,7 +28,7 @@ const cvData = [
     { html: `To view a printer-friendly version, run: <span class="output-item">open cv</span>` },
     { text: ' ' },
     { html: '<span class="output-title">About Me</span>' },
-    { text: 'A highly motivated and results-oriented system engineer with over 5 years of experience...' },
+    { text: 'A highly motivated and results-oriented system engineer with over 5 years of experience in designing, implementing, and managing robust IT infrastructures. Passionate about cloud technologies, automation, and DevOps practices to drive efficiency and innovation. Currently pursuing a dual Master\'s degree in Cloud Applications & Security Engineering alongside a role at Audi AG, focusing on cutting-edge automotive IT solutions.' },
     { text: ' ' },
     { html: '<span class="output-title">Career Journey</span>' },
     { html: '<span class="output-item">  Dual Master Student at Audi AG (2024 - Present)</span>' },
@@ -37,13 +37,21 @@ const cvData = [
     { html: '<span class="output-item">  Softwaredeveloper at Ametras metals GmbH (2018 - 2021)</span>' },
     { text: ' ' },
     { html: '<span class="output-title">Skills</span>' },
-    { html: '<span class="output-item">  - Linux, Networking, Scripting (Bash, Python), Cloud (AWS, Azure)</span>' },
-    { html: '<span class="output-item">  - Automation (Ansible, Terraform), Monitoring (Prometheus, Grafana)</span>' },
-    { html: '<span class="output-item">  - Containerization (Docker, Kubernetes), Security Best Practices</span>' },
+    { html: '<span class="output-item">  - Linux Server Administration (Debian, SUSE)</span>' },
+    { html: '<span class="output-item">  - Network Configuration (TCP/IP, DNS, DHCP, VLANs)</span>' },
+    { html: '<span class="output-item">  - Scripting (Bash, Python)</span>' },
+    { html: '<span class="output-item">  - Cloud Platforms (AWS, Azure)</span>' },
+    { html: '<span class="output-item">  - Automation Tools (Ansible, Terraform)</span>' },
+    { html: '<span class="output-item">  - Monitoring Tools (Prometheus, Grafana, Nagios)</span>' },
+    { html: '<span class="output-item">  - Containerization (Docker, Kubernetes)</span>' },
+    { html: '<span class="output-item">  - Security Best Practices</span>' },
+    { html: '<span class="output-item">  - Vibe Coding 😎</span>' },
     { text: ' ' },
     { html: '<span class="output-title">Education</span>' },
     { html: '<span class="output-item">  - Master, Cloud Applications & Security Engineering - TH Ingolstadt</span>' },
     { html: '<span class="output-item">  - Bachelor, Wirtschaftsinformatik - DHBW Ravensburg</span>' },
+    { text: ' ' },
+  
 ];
 
 // --- UTILITY FUNCTIONS ---
@@ -105,9 +113,11 @@ export function executeCommand(input, term, state) {
         case 'help':
             term.print([
                 { html: '<span class="output-title">Direct Commands:</span>' },
+                { html: '  about      Display a short bio' },
                 { html: '  cv         Display my curriculum vitae' },
                 { html: '  projects   List key projects' },
                 { html: '  social     Show social media links' },
+                { html: '  contact    Show contact information' },
                 { html: '  theme <id> Change color theme (e.g., theme light)' },
                 { html: '  neofetch   Display system info' },
                 { html: '  history    Show command history' },
@@ -123,6 +133,14 @@ export function executeCommand(input, term, state) {
             ]);
             break;
         
+        case 'about':
+            // Extract the "About Me" section from cvData
+            const aboutMeLines = cvData.slice(
+                cvData.findIndex(line => line.html && line.html.includes('About Me')),
+                cvData.findIndex(line => line.html && line.html.includes('Career Journey')) -1 // -1 to exclude the empty line before next section
+            );
+            term.print(aboutMeLines);
+            break;
         case 'cv':
             term.print(cvData);
             break;
@@ -139,6 +157,13 @@ export function executeCommand(input, term, state) {
                 { html: '<span class="output-title">Connect with me:</span>' },
                 { html: `  - GitHub      <a href="https://github.com/bieggerm" target="_blank">github.com/bieggerm</a>` },
                 { html: `  - LinkedIn    <a href="https://www.linkedin.com/in/marius-biegger/" target="_blank">linkedin.com/in/marius-biegger</a>` }
+            ]);
+            break;
+        case 'contact':
+            term.print([
+                { html: '<span class="output-title">Get in Touch:</span>' },
+                { html: `  - Email:      <a href="mailto:mail@bieggerm.com">mail@bieggerm.com</a>`},
+                { html: `  - LinkedIn:   <a href="https://www.linkedin.com/in/marius-biegger/" target="_blank">linkedin.com/in/marius-biegger</a>` }
             ]);
             break;
         case 'theme':
@@ -166,13 +191,13 @@ export function executeCommand(input, term, state) {
                 { html: "       \\___)=(___/      ", type: 'neofetch-art' }
             ].map((line, i) => {
                 const info = [
-                    { html: '<span class="output-neofetch-title">Marius Biegger @ bieggere.io</span>' },
+                    { html: '<span class="output-neofetch-title"> Marius Biegger @ bieggerm.com</span>' },
                     { html: '<span class="output-neofetch-title">----------------------------</span>' },
                     { text: `OS:     MariusBieggerOS (Web-Based)` },
                     { text: `Kernel: Linux & Cloud Automation` },
                     { text: `Title:  System Engineer` },
                     { text: `Based:  Ingolstadt, Germany` },
-                    { text: `Uptime: ${getUptime(state.startTime)}` },
+                    { text: ` Uptime: ${getUptime(state.startTime)}` },
                     { text: `Shell:  zsh (emulated)` }
                 ];
                 return { html: `<span class="output-neofetch-art">${line.html}</span> ${info[i] ? info[i].html || info[i].text : ''}` };
@@ -183,8 +208,9 @@ export function executeCommand(input, term, state) {
             term.print(state.history.map((cmd, i) => ({ text: `  ${state.history.length - i}  ${cmd}` })));
             break;
         case 'exit':
-            term.print("Goodbye!");
-            setTimeout(() => window.close(), 500);
+            term.clear();
+            term.print("Goodbye! You can now close this tab.");
+            term.lock(); // Prevent further input
             break;
 
         // File System Commands
@@ -252,7 +278,7 @@ export function executeCommand(input, term, state) {
 
         // Other utility commands
         case 'whoami':
-            term.print('guest');
+            term.print('guest - a curious explorer of this digital realm.');
             break;
         case 'date':
             term.print(new Date().toLocaleString());
