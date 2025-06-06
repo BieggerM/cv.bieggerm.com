@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marius Biegger – Terminal Portfolio</title>
-    <meta
-      name="description"
-      content="Marius Biegger's interactive terminal portfolio and CV."
-    />
+    <meta name="description" content="Marius Biegger's interactive terminal portfolio and CV."/>
     <meta name="author" content="Marius Biegger" />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
@@ -19,7 +16,7 @@
             --title: #7dcfff;
             --item: #9ece6a;
             --error: #f7768e;
-            --white: #a9b1d6;
+            --dir: #7aa2f7;
         }
         html, body {
             height: 100%;
@@ -53,7 +50,7 @@
             display: flex;
             flex-shrink: 0;
         }
-        .prompt {
+        .prompt-text {
             color: var(--prompt);
             margin-right: 8px;
             white-space: nowrap;
@@ -70,14 +67,10 @@
         #command-input:focus {
             outline: none;
         }
-
-        /* Output styling */
         .output-command { color: var(--command); }
-        .output-title { color: var(--title); }
-        .output-item { color: var(--item); }
         .output-error { color: var(--error); }
-        .output-neofetch-title { color: var(--prompt); }
-        .output-neofetch-art { color: var(--prompt); }
+        .output-dir { color: var(--dir); font-weight: bold; }
+        .output-file { color: var(--foreground); }
     </style>
 </head>
 <body>
@@ -86,332 +79,9 @@
             <div id="output"></div>
         </div>
         <div id="input-line" class="line" style="display: none;">
-            <span class="prompt">guest@biegger.io:~$</span>
             <input type="text" id="command-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
         </div>
     </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const output = document.getElementById('output');
-        const inputLine = document.getElementById('input-line');
-        const commandInput = document.getElementById('command-input');
-        const scrollWrapper = document.getElementById('scroll-wrapper');
-        
-        let isLocked = false;
-        let commandHistory = [];
-        let historyIndex = -1;
-        const startTime = new Date();
-
-        // --- DATA ---
-        const introLines = [
-            "Welcome to my digital space.",
-            "I know your time is valuable,",
-            "so I've designed this page to be fast and concise.",
-            " ",
-            "Type 'help' to see available commands."
-        ];
-        
-        const themes = {
-            'default': {
-                '--background': '#1a1b26', '--foreground': '#c0caf5', '--prompt': '#7aa2f7',
-                '--command': '#bb9af7', '--title': '#7dcfff', '--item': '#9ece6a',
-                '--error': '#f7768e', '--white': '#a9b1d6'
-            },
-            'light': {
-                '--background': '#e0e0e0', '--foreground': '#1f1f1f', '--prompt': '#0055c4',
-                '--command': '#7814a8', '--title': '#0055c4', '--item': '#007800',
-                '--error': '#c40000', '--white': '#333333'
-            },
-            'dracula': {
-                '--background': '#282a36', '--foreground': '#f8f8f2', '--prompt': '#bd93f9',
-                '--command': '#ff79c6', '--title': '#8be9fd', '--item': '#50fa7b',
-                '--error': '#ff5555', '--white': '#f8f8f2'
-            }
-        };
-
-        const commands = {
-            help: {
-                data: [
-                    { text: 'Available commands:', type: 'title' },
-                    { text: '  about      Displays a short bio', type: 'item' },
-                    { text: '  projects   Lists key projects', type: 'item' },
-                    { text: '  cv         Prints the full curriculum vitae', type: 'item' },
-                    { text: '  social     Shows social media links', type: 'item' },
-                    { text: '  contact    Shows contact information', type: 'item' },
-                    { text: '  open <url> Opens a link in a new tab (e.g., open github)', type: 'item' },
-                    { text: '  theme <id> Changes the terminal theme (e.g., theme light)', type: 'item' },
-                    { text: '  history    Shows command history', type: 'item' },
-                    { text: '  neofetch   Displays system info', type: 'item' },
-                    { text: '  date       Shows the current date', type: 'item' },
-                    { text: '  whoami     Displays user information', type: 'item' },
-                    { text: '  clear      Clears the terminal screen', type: 'item' },
-                    { text: '  exit       Closes the terminal', type: 'item' }
-                ]
-            },
-            about: { data: [{ text: 'A highly motivated and results-oriented system engineer with over 5 years of experience in designing, implementing, and maintaining robust and scalable IT infrastructure. Passionate about automation and improving system efficiency through scripting and infrastructure-as-code principles.', type: 'default' }] },
-            projects: {
-                data: [
-                    { text: 'Key Projects:', type: 'title' },
-                    { text: '  - Project Heimdall      A real-time monitoring dashboard using Prometheus & Grafana.', type: 'default' },
-                    { text: '  - Ansible Playbooks     A public repository of automation scripts for cloud provisioning.', type: 'default' },
-                    { text: '  - This Website          An interactive terminal portfolio built with vanilla JS.', type: 'default' },
-                ]
-            },
-            social: {
-                data: [
-                    { text: 'Connect with me:', type: 'title' },
-                    { text: '  - GitHub      https://github.com/bieggerm', type: 'item' },
-                    { text: '  - LinkedIn    https://www.linkedin.com/in/marius-biegger/', type: 'item' }
-                ]
-            },
-            contact: {
-                data: [
-                    { text: 'Contact Information:', type: 'title' },
-                    { text: '  You can reach out to me via email or connect on LinkedIn.', type: 'default' },
-                    { text: '  I am currently looking for opportunities.', type: 'default' },
-                    { text: '  (Contact details would go here)', type: 'item' }
-                ]
-            },
-            cv: {
-                data: [
-                    { text: 'Marius Biegger - Curriculum Vitae', type: 'title' },
-                    { text: '=================================================', type: 'default' },
-                    { text: 'To view a printer-friendly version, type: open cv', type: 'item' },
-                    { text: ' ', type: 'default' },
-                    { text: 'About Me', type: 'title' },
-                    { text: 'A highly motivated and results-oriented system engineer with over 5 years of experience...', type: 'default' },
-                    { text: ' ', type: 'default' },
-                    { text: 'Career Journey', type: 'title' },
-                    { text: '  Dual Master Student at Audi AG (2024 - Present)', type: 'item' },
-                    { text: '  System Engineer - DevOps at Vetter Pharma (2022 - 2024)', type: 'item' },
-                    { text: '  Cloud Operations Engineer at Liebherr (2021 - 2022)', type: 'item' },
-                    { text: '  Softwaredeveloper at Ametras metals GmbH (2018 - 2021)', type: 'item' },
-                    { text: ' ', type: 'default' },
-                    { text: 'Skills', type: 'title' },
-                    { text: '  - Linux, Networking, Scripting (Bash, Python), Cloud (AWS, Azure)', type: 'item' },
-                    { text: '  - Automation (Ansible, Terraform), Monitoring (Prometheus, Grafana)', type: 'item' },
-                    { text: '  - Containerization (Docker, Kubernetes), Security Best Practices', type: 'item' },
-                    { text: ' ', type: 'default' },
-                    { text: 'Education', type: 'title' },
-                    { text: '  - Master, Cloud Applications & Security Engineering - TH Ingolstadt', type: 'item' },
-                    { text: '  - Bachelor, Wirtschaftsinformatik - DHBW Ravensburg', type: 'item' },
-                ]
-            }
-        };
-
-        // --- CORE FUNCTIONS ---
-
-        const typeLines = async (lines, delay = 30) => {
-            isLocked = true;
-            for (const line of lines) {
-                const lineEl = document.createElement('div');
-                lineEl.classList.add('line');
-                output.appendChild(lineEl);
-                for (let i = 0; i < line.length; i++) {
-                    lineEl.textContent += line[i];
-                    scrollToBottom();
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-            }
-            isLocked = false;
-        };
-        
-        const printLines = (lines) => {
-            lines.forEach(line => {
-                const lineEl = document.createElement('div');
-                lineEl.classList.add('line', `output-${line.type}`);
-                lineEl.textContent = line.text;
-                output.appendChild(lineEl);
-            });
-        };
-
-        const processCommand = (input) => {
-            const [command, ...args] = input.split(' ').filter(i => i);
-            if (!command) return;
-
-            const commandOutput = document.createElement('div');
-            commandOutput.innerHTML = `<span class="prompt">guest@biegger.io:~$</span> <span class="output-command">${input}</span>`;
-            output.appendChild(commandOutput);
-
-            if (commands[command]) {
-                printLines(commands[command].data);
-            } else {
-                handleSpecialCommands(command, args);
-            }
-        };
-
-        const handleSpecialCommands = (command, args) => {
-            switch (command) {
-                case 'clear':
-                    output.innerHTML = '';
-                    break;
-                case 'date':
-                    printLines([{ text: new Date().toString(), type: 'default' }]);
-                    break;
-                case 'whoami':
-                    printLines([{ text: "guest - a curious visitor exploring the digital space of Marius Biegger.", type: 'item' }]);
-                    break;
-                case 'history':
-                    printLines(commandHistory.map((cmd, i) => ({ text: `  ${i + 1}  ${cmd}`, type: 'default' })));
-                    break;
-                case 'open':
-                    handleOpen(args);
-                    break;
-                case 'theme':
-                    handleTheme(args);
-                    break;
-                case 'neofetch':
-                    printLines(getNeofetchData());
-                    break;
-                case 'sudo':
-                    printLines([{ text: "User 'guest' is not in the sudoers file. This incident will be reported.", type: 'error' }]);
-                    break;
-                case 'cowsay':
-                    printLines(getCowsay(args.join(' ')));
-                    break;
-                case 'exit':
-                    printLines([{ text: 'Goodbye!', type: 'item' }]);
-                    setTimeout(() => window.close(), 500);
-                    break;
-                default:
-                    printLines([{ text: `command not found: ${command}. Type 'help' for a list of commands.`, type: 'error' }]);
-                    break;
-            }
-        };
-        
-        const handleOpen = (args) => {
-            const target = args[0];
-            const links = {
-                github: 'https://github.com/bieggerm',
-                linkedin: 'https://www.linkedin.com/in/marius-biegger/',
-                cv: 'cv.html'
-            };
-            if (links[target]) {
-                printLines([{ text: `Opening ${target}...`, type: 'default' }]);
-                window.open(links[target], '_blank');
-            } else {
-                printLines([{ text: `Item '${target}' not found.`, type: 'error' }]);
-            }
-        };
-        
-        const handleTheme = (args) => {
-            const themeId = args[0];
-            if (!themeId) {
-                let availableThemes = Object.keys(themes).map(t => ({text: `  - ${t}`, type: 'item'}));
-                availableThemes.unshift({text: 'Available themes:', type: 'title'});
-                printLines(availableThemes);
-                return;
-            }
-            if (themes[themeId]) {
-                applyTheme(themeId);
-                printLines([{ text: `Theme set to '${themeId}'`, type: 'item' }]);
-            } else {
-                printLines([{ text: `Theme '${themeId}' not found.`, type: 'error' }]);
-            }
-        };
-        
-        const applyTheme = (themeId) => {
-            const theme = themes[themeId];
-            for (const [key, value] of Object.entries(theme)) {
-                document.documentElement.style.setProperty(key, value);
-            }
-        };
-        
-        const getUptime = () => {
-            const now = new Date();
-            const diff = Math.abs(now - startTime);
-            const minutes = Math.floor(diff / 60000);
-            const seconds = Math.floor((diff % 60000) / 1000);
-            return `${minutes}m ${seconds}s`;
-        };
-
-        const getNeofetchData = () => [
-            { text: "           .--.         ", type: 'neofetch-art' },
-            { text: "          |o_o |         ", type: 'neofetch-art' },
-            { text: "          |:_/ |         ", type: 'neofetch-art' },
-            { text: "         //   \\ \\        ", type: 'neofetch-art' },
-            { text: "        (|     | )       ", type: 'neofetch-art' },
-            { text: "       /'\\_   _/`\\       ", type: 'neofetch-art' },
-            { text: "       \\___)=(___/      ", type: 'neofetch-art' }
-        ].map((line, i) => {
-            const info = [
-                { text: 'Marius Biegger @ bieggere.io', type: 'neofetch-title' },
-                { text: '----------------------------', type: 'neofetch-title' },
-                { text: `OS:     MariusBieggerOS (Web-Based)`, type: 'default' },
-                { text: `Kernel: Linux & Cloud Automation`, type: 'default' },
-                { text: `Title:  System Engineer`, type: 'default' },
-                { text: `Based:  Ingolstadt, Germany`, type: 'default' },
-                { text: `Uptime: ${getUptime()}`, type: 'default' },
-                { text: `Shell:  zsh (emulated)`, type: 'default' }
-            ];
-            return { text: line.text + ' ' + (info[i] ? info[i].text : ''), type: line.type };
-        });
-
-        const getCowsay = (message) => {
-            message = message || "Moo!";
-            const cow = [
-                ` < ${message} >`,
-                "  --------------",
-                "         \\   ^__^",
-                "          \\  (oo)\\_______",
-                "             (__)\\       )\\/\\",
-                "                 ||----w |",
-                "                 ||     ||"
-            ];
-            return cow.map(line => ({ text: line, type: 'default' }));
-        };
-
-        const scrollToBottom = () => {
-            scrollWrapper.scrollTop = scrollWrapper.scrollHeight;
-        };
-
-        // --- EVENT LISTENERS & INITIALIZATION ---
-
-        commandInput.addEventListener('keydown', (e) => {
-            if (isLocked) return;
-            if (e.key === 'Enter') {
-                const command = commandInput.value.trim();
-                if (command) {
-                    commandHistory.unshift(command);
-                    historyIndex = -1;
-                }
-                processCommand(command);
-                commandInput.value = '';
-                scrollToBottom();
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (historyIndex < commandHistory.length - 1) {
-                    historyIndex++;
-                    commandInput.value = commandHistory[historyIndex];
-                }
-            } else if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (historyIndex > 0) {
-                    historyIndex--;
-                    commandInput.value = commandHistory[historyIndex];
-                } else {
-                    historyIndex = -1;
-                    commandInput.value = '';
-                }
-            }
-        });
-        
-        terminal.addEventListener('click', () => commandInput.focus());
-
-        // --- MODIFIED ---: The startup function now prints instantly
-        const init = () => {
-            // Convert the array of intro strings to the object format printLines expects
-            const introData = introLines.map(line => ({ text: line, type: 'default' }));
-            printLines(introData);
-            
-            inputLine.style.display = 'flex';
-            commandInput.focus();
-            isLocked = false;
-        };
-
-        init();
-    });
-    </script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
