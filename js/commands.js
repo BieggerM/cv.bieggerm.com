@@ -32,7 +32,7 @@ const cvData = [
     { text: ' ' },
     { html: '<span class="output-title">Career Journey</span>' },
     { text: 'My professional path has taken me through a variety of roles and industries, each contributing to my growth as a system engineer and shaping my approach to technology and teamwork.' },
-    { text: ' ' }, // Added a space for better readability before stations
+    { text: ' ' }, 
     { html: '<span class="output-item">  Dual Master Student at Audi AG (2024 - Present)</span>' },
     { html: '<span class="output-item">  System Engineer - DevOps at Vetter Pharma (2022 - 2024)</span>' },
     { html: '<span class="output-item">  Cloud Operations Engineer at Liebherr (2021 - 2022)</span>' },
@@ -56,7 +56,18 @@ const cvData = [
   
 ];
 
-// --- UTILITY FUNCTIONS ---
+const profileImagePaths = [
+    "media/profiles/profile.jpg",
+    "media/profiles/profile1.jpg",
+    "media/profiles/profile2.jpg",
+    "media/profiles/profile3.jpg",
+    "media/profiles/profile4.jpg",
+    "media/profiles/profile5.jpg",
+    "media/profiles/profile6.jpg",
+    "media/profiles/profile7.jpg",
+    "media/profiles/profile8.jpg"
+];
+
 
 function resolvePath(path, cwd) {
     if (path.startsWith('/')) return path;
@@ -118,6 +129,7 @@ export function executeCommand(input, term, state) {
                 { html: '  about      Display a short bio' },
                 { html: '  cv         Display my curriculum vitae' },
                 { html: '  social     Show social media links' },
+                { html: '  profile    Display my profile picture' },
                 { html: '  contact    Show contact information' },
                 { html: '  theme <id> Change color theme (e.g., theme light)' },
                 { html: '  neofetch   Display system info' },
@@ -158,6 +170,14 @@ export function executeCommand(input, term, state) {
                 { html: `  - Email:      <a href="mailto:mail@bieggerm.com">mail@bieggerm.com</a>`},
                 { html: `  - LinkedIn:   <a href="https://www.linkedin.com/in/marius-biegger/" target="_blank">linkedin.com/in/marius-biegger</a>` }
             ]);
+            break;
+        case 'profile':
+            const randomIndex = Math.floor(Math.random() * profileImagePaths.length);
+            const randomImageSrc = profileImagePaths[randomIndex];
+            term.print({
+                html: `<img src="${randomImageSrc}" alt="Marius Biegger - Profile Picture" style="max-width: 150px; max-height: 150px; border-radius: 8px; margin-top: 5px; margin-bottom: 5px; object-fit: cover;" />`
+            });
+            term.print({ text: 'Looking sharp!' });
             break;
         case 'theme':
             const themeId = args[0];
