@@ -52,7 +52,7 @@
         align-items: center;
       }
 
-      /* --- MODIFIED GREETER STYLES --- */
+      /* Greeter specific styles */
       #greeter-container {
         display: flex;
         flex-direction: column;
@@ -71,30 +71,43 @@
         padding: 20px;
         box-sizing: border-box;
         overflow-y: auto;
-        /* This is the key fix: prevent long lines from creating horizontal scroll */
         overflow-x: hidden;
       }
 
       .greeter-line {
-        /* Let the line's width be determined by its content, not animation */
         white-space: pre;
       }
 
-      /* A new class, controlled by JS, to show the blinking cursor */
       .is-typing {
-        /* The border creates the cursor effect */
         border-right: 0.15em solid #0f0;
-        /* The animation makes it blink */
-        animation: blink-caret 0.75s step-end infinite;
+        animation: blink-caret-green 0.75s step-end infinite;
       }
       
-      /* The keyframe animation for the cursor blink */
-      @keyframes blink-caret {
+      @keyframes blink-caret-green {
         from, to { border-color: transparent }
         50% { border-color: #0f0; }
       }
 
-      /* Hide main content initially */
+      /* --- ADDED ---: Styles for the new terminal greeting */
+      #terminal-greeting {
+        font-size: 1.1rem;
+        color: #3a3a3a;
+        margin-top: -0.5rem;
+        margin-bottom: 2.5rem;
+        height: 1.5em; /* Reserve space to prevent layout shift during typing */
+      }
+
+      .blinking-cursor {
+        border-right: 0.15em solid #222; /* Cursor color for the light theme */
+        animation: blink-caret-dark 0.75s step-end infinite;
+      }
+
+      @keyframes blink-caret-dark {
+        from, to { border-color: transparent }
+        50% { border-color: #222; }
+      }
+      /* --- END ADDED --- */
+
       #main-content {
         display: none;
       }
@@ -108,6 +121,7 @@
     <div id="main-content">
       <main>
         <h1>Marius Biegger</h1>
+        <p id="terminal-greeting"></p>
         <section>
           <h2>About Me</h2>
           <p>
@@ -313,21 +327,17 @@
             const currentMessage = bootMessages[messageIndex];
             const lineElement = document.createElement('span');
             lineElement.classList.add('greeter-line');
-
-            // Add the new line element to the container
             greeterContainer.appendChild(lineElement);
-            // Add the 'is-typing' class to show the cursor
             lineElement.classList.add('is-typing');
 
-            let typingSpeed = 5;
-            let delayBeforeNextLine = 50;
+            let typingSpeed = 4;
+            let delayBeforeNextLine = 40;
 
             if (currentMessage === "./greeting ") {
                 typingSpeed = 80;
-                delayBeforeNextLine = 1500;
+                delayBeforeNextLine = 300;
             }
 
-            // Simulate typing character by character
             let currentLineCharIndex = 0;
             const typeChar = () => {
               if (currentLineCharIndex < currentMessage.length) {
@@ -335,13 +345,9 @@
                 currentLineCharIndex++;
                 setTimeout(typeChar, typingSpeed);
               } else {
-                // Line is finished typing.
-                // Remove the cursor unless it's the very last line of the animation.
                 if (messageIndex < bootMessages.length - 1) {
                     lineElement.classList.remove('is-typing');
                 }
-                
-                // Move to the next message
                 messageIndex++;
                 setTimeout(typeLine, delayBeforeNextLine);
               }
@@ -349,8 +355,6 @@
             typeChar();
 
           } else {
-            // All messages have been typed out.
-            // Hide the greeter and show the main content with a fade effect.
             greeterContainer.style.opacity = '0';
             greeterContainer.style.transition = 'opacity 1s ease-out';
 
@@ -361,12 +365,37 @@
               mainContent.style.transition = 'opacity 1s ease-in';
               setTimeout(() => {
                 mainContent.style.opacity = '1';
-              }, 50); // Small delay to ensure the transition triggers
-            }, 1000); // Wait for the fade-out to complete
+                // --- ADDED ---: Start the new greeting animation after fade-in
+                typeGreeting();
+                // --- END ADDED ---
+              }, 50);
+            }, 1000);
           }
         }
 
-        typeLine(); // Start the animation
+        // --- ADDED ---: Function to type the greeting on the main page
+        function typeGreeting() {
+            const greetingElement = document.getElementById('terminal-greeting');
+            if (!greetingElement) return;
+
+            const greetingText = "Welcome to my digital space."; // You can change this text
+            let charIndex = 0;
+            
+            greetingElement.classList.add('blinking-cursor');
+
+            function typeChar() {
+                if (charIndex < greetingText.length) {
+                    greetingElement.textContent += greetingText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeChar, 90); // Adjust typing speed here (in ms)
+                }
+                // The cursor will remain blinking at the end
+            }
+            typeChar();
+        }
+        // --- END ADDED ---
+
+        typeLine(); // Start the initial boot animation
       });
     </script>
   </body>
