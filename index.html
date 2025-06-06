@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marius Biegger – Linux & Cloud Automation | CV & Portfolio</title>
+    <!-- Optionally update or remove the color-scheme meta tag -->
     <meta name="color-scheme" content="light" />
     <meta
       name="description"
@@ -72,6 +73,15 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+      .company-logo {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        margin-top: 0.3em;
+        background: #fff; /* optional: for transparent SVGs */
+        border-radius: 8px; /* optional: for a softer look */
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04); /* optional: subtle shadow */
       }
     </style>
   </head>
@@ -178,51 +188,126 @@
           shaping my approach to technology and teamwork.
         </p>
         <h3>Stations</h3>
-        <ul>
-          <li>
-            <strong>Dual Master Student at Audi AG</strong> <br />
-            <small>2024 - Present</small>
-            <p>
-              Currently taking part in a dual master's program focused on cloud
-              applications and security engineering. I'm broadening my knowledge
-              in areas like distributed systems and data infrastructure while
-              gaining practical experience at Audi AG.
-            </p>
-          </li>
-          <li>
-            <strong>System Engineer - DevOps at Vetter Pharma</strong> <br />
-            <small>2022 - 2024</small>
-            <p>
-              Responsible for automating and maintaining the company's
-              Linux-based server infrastructure and cloud environments (Azure).
-              Led the implementation of automation initiatives and played a key
-              role in improving system security and reliability.
-            </p>
-          </li>
-          <li>
-            <strong
-              >Cloud Operations Engineer at Liebherr Digital Development
-              Center</strong
+        <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+          <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+            <img
+              src="media/audi-logo.png"
+              alt="Audi AG Logo"
+              style="
+                width: 64px;
+                height: 64px;
+                object-fit: contain;
+                border-radius: 8px;
+              "
+            />
+          </figure>
+          <aside style="flex: 1;">
+            <header
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+              "
             >
-            <br />
-            <small>2021 - 2022</small>
-            <p>
-              Contributed to the design and deployment of new IT infrastructure
-              projects. Provided technical support and troubleshooting for
-              system-related issues. Gained experience in managing both
-              on-premises and cloud resources.
-            </p>
-          </li>
-          <li>
-            <strong>Softwaredeveloper at Ametras metals GmbH</strong> <br />
-            <small>2018 - 2021</small>
-            <p>
-              Contributed to a Softwareproject for an ERP-System written in
-              Java. Gained my first experiences working in a technical
-              environment.
-            </p>
-          </li>
-        </ul>
+              <strong style="font-size: 1.1em;">Dual Master Student at Audi AG</strong>
+              <span style="color: #888; font-size: 0.95em;">2024 - Present</span>
+            </header>
+            <div style="margin-top: 0.5em;">
+              Currently taking part in a dual master's program focused on cloud applications and security engineering. I'm broadening my knowledge in areas like distributed systems and data infrastructure while gaining practical experience at Audi AG.
+            </div>
+            <!-- Optional: <footer> for extra info -->
+          </aside>
+        </article>
+
+        <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+          <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+            <img
+              src="media/vetter-pharma.svg"
+              alt="Vetter Pharma Logo"
+              style="
+                width: 64px;
+                height: 64px;
+                object-fit: contain;
+                border-radius: 8px;
+              "
+            />
+          </figure>
+          <aside style="flex: 1;">
+            <header
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+              "
+            >
+              <strong style="font-size: 1.1em;">System Engineer - DevOps at Vetter Pharma</strong>
+              <span style="color: #888; font-size: 0.95em;">2022 - 2024</span>
+            </header>
+            <div style="margin-top: 0.5em;">
+              Responsible for automating and maintaining the company's Linux-based server infrastructure and cloud environments (Azure). Led the implementation of automation initiatives and played a key role in improving system security and reliability.
+            </div>
+          </aside>
+        </article>
+
+        <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+          <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+            <img
+              src="media/Liebherr-Logo.svg.png"
+              alt="Liebherr Digital Development Center Logo"
+              style="
+                width: 64px;
+                height: 64px;
+                object-fit: contain;
+                border-radius: 8px;
+              "
+            />
+          </figure>
+          <aside style="flex: 1;">
+            <header
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+              "
+            >
+              <strong style="font-size: 1.1em;">Cloud Operations Engineer at Liebherr Digital Development Center</strong>
+              <span style="color: #888; font-size: 0.95em;">2021 - 2022</span>
+            </header>
+            <div style="margin-top: 0.5em;">
+              Contributed to the design and deployment of new IT infrastructure projects. Provided technical support and troubleshooting for system-related issues. Gained experience in managing both on-premises and cloud resources.
+            </div>
+          </aside>
+        </article>
+
+        <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+          <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+            <img
+              src="media/ametras__01_metals.png"
+              alt="Ametras metals GmbH Logo"
+              style="
+                width: 64px;
+                height: 64px;
+                object-fit: contain;
+                border-radius: 8px;
+              "
+            />
+          </figure>
+          <aside style="flex: 1;">
+            <header
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+              "
+            >
+              <strong style="font-size: 1.1em;">Softwaredeveloper at Ametras metals GmbH</strong>
+              <span style="color: #888; font-size: 0.95em;">2018 - 2021</span>
+            </header>
+            <div style="margin-top: 0.5em;">
+              Contributed to a Softwareproject for an ERP-System written in Java. Gained my first experiences working in a technical environment.
+            </div>
+          </aside>
+        </article>
       </section>
 
       <section>
