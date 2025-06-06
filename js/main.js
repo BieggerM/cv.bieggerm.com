@@ -11,7 +11,7 @@ const state = {
     cwd: '/home/guest',
     history: [],
     historyIndex: -1,
-    startTime: new Date() // ADDED: For neofetch uptime
+    startTime: new Date()
 };
 
 // --- CORE LOGIC ---
@@ -66,6 +66,18 @@ commandInputEl.addEventListener('keydown', (e) => {
         }
     }
 });
+
+// --- ADDED: Mobile keyboard visibility fix ---
+commandInputEl.addEventListener('focus', () => {
+    // When the input is focused, a virtual keyboard will likely appear.
+    // We give it a moment to slide up, then scroll the terminal to the bottom
+    // to ensure the input line is visible.
+    setTimeout(() => {
+        term.scrollToBottom();
+    }, 100);
+});
+// --- END ADDED ---
+
 
 // Start the application
 init();
