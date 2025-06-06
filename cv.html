@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marius Biegger – Linux & Cloud Automation | CV & Portfolio</title>
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="Marius Biegger – Experienced Linux system engineer and cloud automation specialist. View my CV, skills, and professional journey in IT infrastructure, DevOps, and cloud platforms."
+    />
+    <meta
+      name="keywords"
+      content="Marius Biegger, Linux, Cloud, DevOps, System Engineer, Automation, Infrastructure, CV, Portfolio, IT, Ansible, Terraform, AWS, Azure, Prometheus, Grafana, Kubernetes"
+    />
+    <meta name="author" content="Marius Biegger" />
+    <meta
+      property="og:title"
+      content="Marius Biegger – Linux & Cloud Automation | CV & Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Experienced Linux system engineer and cloud automation specialist. Explore my CV, skills, and professional journey."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bieggerm.github.io/" />
+    <meta
+      property="og:image"
+      content="https://bieggerm.github.io/media/profile.jpg"
+    />
+    <link rel="canonical" href="https://bieggerm.github.io/" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        max-width: 700px;
+        margin: 2rem auto;
+        font-family: 'Fira Mono', 'JetBrains Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background: #fff;
+        color: #222;
+      }
+      .profile-img {
+        border-radius: 50%;
+        width: 160px;
+        height: 160px;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* --- MODIFIED GREETER STYLES --- */
+      #greeter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #222;
+        color: #0f0;
+        z-index: 9999;
+        font-family: 'Fira Mono', 'JetBrains Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+        font-size: 1.2em;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        /* This is the key fix: prevent long lines from creating horizontal scroll */
+        overflow-x: hidden;
+      }
+
+      .greeter-line {
+        /* Let the line's width be determined by its content, not animation */
+        white-space: pre;
+      }
+
+      /* A new class, controlled by JS, to show the blinking cursor */
+      .is-typing {
+        /* The border creates the cursor effect */
+        border-right: 0.15em solid #0f0;
+        /* The animation makes it blink */
+        animation: blink-caret 0.75s step-end infinite;
+      }
+      
+      /* The keyframe animation for the cursor blink */
+      @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: #0f0; }
+      }
+
+      /* Hide main content initially */
+      #main-content {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="greeter-container">
+      </div>
+
+    <div id="main-content">
+      <main>
+        <h1>Marius Biegger</h1>
+        <section>
+          <h2>About Me</h2>
+          <p>
+            A highly motivated and results-oriented system engineer with over 5
+            years of experience in designing, implementing, and maintaining robust
+            and scalable IT infrastructure. I possess a strong understanding of
+            Linux systems, network protocols, and cloud technologies. I am
+            passionate about automation and improving system efficiency through
+            scripting and infrastructure-as-code principles.
+          </p>
+        </section>
+
+        <section>
+          <h2>Career Journey</h2>
+          <p>
+            My professional path has taken me through a variety of roles and
+            industries, each contributing to my growth as a system engineer and
+            shaping my approach to technology and teamwork.
+          </p>
+          <h3>Stations</h3>
+          <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+              <img
+                src="media/audi-logo.png"
+                alt="Audi AG Logo"
+                style="
+                  width: 64px;
+                  height: 64px;
+                  object-fit: contain;
+                  border-radius: 8px;
+                "
+              />
+            </figure>
+            <aside style="flex: 1;">
+              <header
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <strong style="font-size: 1.1em;">Dual Master Student at Audi AG</strong>
+                <span style="color: #888; font-size: 0.95em; min-width: 110px; text-align: right; display: inline-block;">2024 - Present</span>
+              </header>
+              <div style="margin-top: 0.5em;">
+                Currently taking part in a dual master's program focused on cloud applications and security engineering. I'm broadening my knowledge in areas like distributed systems and data infrastructure while gaining practical experience at Audi AG.
+              </div>
+              </aside>
+          </article>
+
+          <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+              <img
+                src="media/vetter-pharma.svg"
+                alt="Vetter Pharma Logo"
+                style="
+                  width: 64px;
+                  height: 64px;
+                  object-fit: contain;
+                  border-radius: 8px;
+                "
+              />
+            </figure>
+            <aside style="flex: 1;">
+              <header
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <strong style="font-size: 1.1em;">System Engineer - DevOps at Vetter Pharma</strong>
+                <span style="color: #888; font-size: 0.95em; min-width: 110px; text-align: right; display: inline-block;">
+                  2022 - 2024
+                </span>
+              </header>
+              <div style="margin-top: 0.5em;">
+                Responsible for automating and maintaining the company's Linux-based server infrastructure and cloud environments (Azure). Led the implementation of automation initiatives and played a key role in improving system security and reliability.
+              </div>
+            </aside>
+          </article>
+
+          <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+              <img
+                src="media/Liebherr-Logo.svg.png"
+                alt="Liebherr Digital Development Center Logo"
+                style="
+                  width: 64px;
+                  height: 64px;
+                  object-fit: contain;
+                  border-radius: 8px;
+                "
+              />
+            </figure>
+            <aside style="flex: 1;">
+              <header
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <strong style="font-size: 1.1em;">Cloud Operations Engineer at Liebherr Digital Development Center</strong>
+                <span style="color: #888; font-size: 0.95em; min-width: 110px; text-align: right; display: inline-block;">2021 - 2022</span>
+              </header>
+              <div style="margin-top: 0.5em;">
+                Contributed to the design and deployment of new IT infrastructure projects. Provided technical support and troubleshooting for system-related issues. Gained experience in managing both on-premises and cloud resources.
+              </div>
+            </aside>
+          </article>
+
+          <article style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
+              <img
+                src="media/ametras__01_metals.png"
+                alt="Ametras metals GmbH Logo"
+                style="
+                  width: 64px;
+                  height: 64px;
+                  object-fit: contain;
+                  border-radius: 8px;
+                "
+              />
+            </figure>
+            <aside style="flex: 1;">
+              <header
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: baseline;
+                "
+              >
+                <strong style="font-size: 1.1em;">Softwaredeveloper at Ametras metals GmbH</strong>
+                <span style="color: #888; font-size: 0.95em; min-width: 110px; text-align: right; display: inline-block;">2018 - 2021</span>
+              </header>
+              <div style="margin-top: 0.5em;">
+                Contributed to a Softwareproject for an ERP-System written in Java. Gained my first experiences working in a technical environment.
+              </div>
+            </aside>
+          </article>
+        </section>
+
+        <section>
+          <h2>Skills</h2>
+          <ul>
+            <li>Linux Server Administration (Debian, SUSE)</li>
+            <li>Network Configuration (TCP/IP, DNS, DHCP, VLANs)</li>
+            <li>Scripting (Bash, Python)</li>
+            <li>Cloud Platforms (AWS, Azure)</li>
+            <li>Automation Tools (Ansible, Terraform)</li>
+            <li>Monitoring Tools (Prometheus, Grafana, Nagios)</li>
+            <li>Containerization (Docker, Kubernetes)</li>
+            <li>Security Best Practices</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Education</h2>
+          <ul>
+            <li>
+              <strong>Master Cloud Applications & Security Engineering</strong
+              ><br />
+              <span>Technische Hochschule Ingolstadt</span>
+            </li>
+            <li>
+              <strong>Bachelor Wirtschaftsinformatik</strong><br />
+              <span>DHBW Ravensburg</span>
+            </li>
+          </ul>
+        </section>
+        <hr />
+        <footer>
+          <p style="margin: 0">&copy; 2025 Marius Biegger</p>
+          <a href="impressum.html">Impressum</a>
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const greeterContainer = document.getElementById('greeter-container');
+        const mainContent = document.getElementById('main-content');
+        
+        const bootMessages = [
+          "GNU/Linux 5.15.0-107-generic x86_64",
+          "Setting hostname...",
+          "Checking file systems... ok",
+          "Activating swap... ok",
+          "Mounting local filesystems... ok",
+          "Starting kernel services...",
+          "Setting up networking interfaces...",
+          "Initializing cloud services...",
+          "Starting system automation services...",
+          "Loading Marius Biegger profile...",
+          "Presenting static CV...",
+          "./cv-static "
+        ];
+
+        let messageIndex = 0;
+
+        function typeLine() {
+          if (messageIndex < bootMessages.length) {
+            const currentMessage = bootMessages[messageIndex];
+            const lineElement = document.createElement('span');
+            lineElement.classList.add('greeter-line');
+
+            // Add the new line element to the container
+            greeterContainer.appendChild(lineElement);
+            // Add the 'is-typing' class to show the cursor
+            lineElement.classList.add('is-typing');
+
+            let typingSpeed = 3;
+            let delayBeforeNextLine = 20;
+
+            if (currentMessage === "./greeting ") {
+                typingSpeed = 50;
+                delayBeforeNextLine = 150;
+            }
+
+            // Simulate typing character by character
+            let currentLineCharIndex = 0;
+            const typeChar = () => {
+              if (currentLineCharIndex < currentMessage.length) {
+                lineElement.textContent += currentMessage.charAt(currentLineCharIndex);
+                currentLineCharIndex++;
+                setTimeout(typeChar, typingSpeed);
+              } else {
+                // Line is finished typing.
+                // Remove the cursor unless it's the very last line of the animation.
+                if (messageIndex < bootMessages.length - 1) {
+                    lineElement.classList.remove('is-typing');
+                }
+                
+                // Move to the next message
+                messageIndex++;
+                setTimeout(typeLine, delayBeforeNextLine);
+              }
+            };
+            typeChar();
+
+          } else {
+            // All messages have been typed out.
+            // Hide the greeter and show the main content with a fade effect.
+            greeterContainer.style.opacity = '0';
+            greeterContainer.style.transition = 'opacity 1s ease-out';
+
+            setTimeout(() => {
+              greeterContainer.style.display = 'none';
+              mainContent.style.display = 'block';
+              mainContent.style.opacity = '0';
+              mainContent.style.transition = 'opacity 1s ease-in';
+              setTimeout(() => {
+                mainContent.style.opacity = '1';
+              }, 50); // Small delay to ensure the transition triggers
+            }, 1000); // Wait for the fade-out to complete
+          }
+        }
+
+        typeLine(); // Start the animation
+      });
+    </script>
+  </body>
+</html>

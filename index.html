@@ -1,275 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marius Biegger – Linux & Cloud Automation | CV & Portfolio</title>
-    <meta name="color-scheme" content="light" />
-    <meta
-      name="description"
-      content="Marius Biegger – Experienced Linux system engineer and cloud automation specialist. View my CV, skills, and professional journey in IT infrastructure, DevOps, and cloud platforms."
-    />
-    <meta
-      name="keywords"
-      content="Marius Biegger, Linux, Cloud, DevOps, System Engineer, Automation, Infrastructure, CV, Portfolio, IT, Ansible, Terraform, AWS, Azure, Prometheus, Grafana, Kubernetes"
-    />
+    <title>Marius Biegger – Terminal Portfolio</title>
+    <meta name="description" content="Marius Biegger's interactive terminal portfolio and CV."/>
     <meta name="author" content="Marius Biegger" />
-    <meta
-      property="og:title"
-      content="Marius Biegger – Linux & Cloud Automation | CV & Portfolio"
-    />
-    <meta
-      property="og:description"
-      content="Experienced Linux system engineer and cloud automation specialist. Explore my CV, skills, and professional journey."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bieggerm.github.io/" />
-    <meta
-      property="og:image"
-      content="https://bieggerm.github.io/media/profile.jpg"
-    />
-    <link rel="canonical" href="https://bieggerm.github.io/" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-      body {
-        max-width: 700px;
-        margin: 2rem auto;
-        font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans",
-          sans-serif;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      .profile-img {
-        display: block;
-        margin: 0 auto 1rem auto;
-        border-radius: 50%;
-        width: 160px;
-        height: 160px;
-        object-fit: cover;
-        object-position: center;
-        max-width: 100%;
-        border: 4px solid #e0e0e0;
-      }
-      h1,
-      h2,
-      h3 {
-        text-align: center;
-      }
-      ul {
-        margin-bottom: 2rem;
-      }
-      .contact-links a {
-        margin-right: 1rem;
-      }
-      footer {
+    :root {
+        --background: #1a1b26;
+        --foreground: #c0caf5;
+        --prompt: #7aa2f7;
+        --command: #bb9af7;
+        --title: #7dcfff;
+        --item: #9ece6a;
+        --error: #f7768e;
+        --dir: #7aa2f7;
+    }
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        /* Prevent pull-to-refresh on mobile */
+        overscroll-behavior-y: contain;
+    }
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+        font-family: 'Fira Mono', monospace;
+        font-size: 16px;
+    }
+    #terminal {
+        height: 100%;
+        padding: 15px;
+        box-sizing: border-box;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-    </style>
-  </head>
-
-  <body>
-    <header
-      style="
+        flex-direction: column;
+        overflow-y: hidden;
+    }
+    #scroll-wrapper {
+        flex-grow: 1;
+        overflow-y: auto;
+        word-break: break-word;
+    }
+    .line {
+        line-height: 1.6;
+        white-space: pre-wrap;
+    }
+    #input-line {
         display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        margin-bottom: 1rem;
-      "
-    >
-    </header>
-    <main>
-      <img
-        src="media/profile.jpg"
-        alt="Picture of Marius Biegger"
-        class="profile-img"
-      />
-      <h1>Marius Biegger</h1>
+        flex-shrink: 0;
+    }
+    .prompt-text {
+        color: var(--prompt);
+        margin-right: 8px;
+        white-space: nowrap;
+    }
+    #command-input {
+        flex-grow: 1;
+        background: transparent;
+        border: none;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        padding: 0;
+    }
+    #command-input:focus {
+        outline: none;
+    }
 
-      <div
-        class="contact-links"
-        style="
-          display: flex;
-          justify-content: center;
-          gap: 1.2rem;
-          margin-bottom: 2rem;
-        "
-      >
-        <a
-          href="mailto:mail@bieggerm.com"
-          title="Email"
-          aria-label="Email"
-        >
-          <svg
-            width="28"
-            height="28"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            viewBox="0 0 24 24"
-          >
-            <rect width="20" height="16" x="2" y="4" rx="2" />
-            <path d="m22 6-10 7L2 6" />
-          </svg>
-        </a>
-        <a
-          href="https://linkedin.com/in/BieggerM"
-          target="_blank"
-          title="LinkedIn"
-          aria-label="LinkedIn"
-        >
-          <svg
-            width="28"
-            height="28"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm13.5 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v5.61z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://github.com/Bieggerm"
-          target="_blank"
-          title="GitHub"
-          aria-label="GitHub"
-        >
-          <svg
-            width="28"
-            height="28"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.69 5.41-5.25 5.7.42.36.79 1.09.79 2.2 0 1.59-.01 2.87-.01 3.26 0 .31.21.68.8.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"
-            />
-          </svg>
-        </a>
-      </div>
+    /* Output styling */
+    .output-command { color: var(--command); }
+    .output-title { color: var(--title); }
+    .output-item { color: var(--item); }
+    .output-error { color: var(--error); }
+    .output-dir { color: var(--dir); font-weight: bold; }
+    .output-neofetch-title { color: var(--prompt); }
+    .output-neofetch-art { color: var(--prompt); }
 
-      <section>
-        <h2>About Me</h2>
-        <p>
-          A highly motivated and results-oriented system engineer with over 5
-          years of experience in designing, implementing, and maintaining robust
-          and scalable IT infrastructure. I possess a strong understanding of
-          Linux systems, network protocols, and cloud technologies. I am
-          passionate about automation and improving system efficiency through
-          scripting and infrastructure-as-code principles.
-        </p>
-      </section>
-
-      <section>
-        <h2>Career Journey</h2>
-        <p>
-          My professional path has taken me through a variety of roles and
-          industries, each contributing to my growth as a system engineer and
-          shaping my approach to technology and teamwork.
-        </p>
-        <h3>Stations</h3>
-        <ul>
-          <li>
-            <strong>Dual Master Student at Audi AG</strong> <br />
-            <small>2024 - Present</small>
-            <p>
-              Currently taking part in a dual master's program focused on cloud
-              applications and security engineering. I'm broadening my knowledge
-              in areas like distributed systems and data infrastructure while
-              gaining practical experience at Audi AG.
-            </p>
-          </li>
-          <li>
-            <strong>System Engineer - DevOps at Vetter Pharma</strong> <br />
-            <small>2022 - 2024</small>
-            <p>
-              Responsible for automating and maintaining the company's
-              Linux-based server infrastructure and cloud environments (Azure).
-              Led the implementation of automation initiatives and played a key
-              role in improving system security and reliability.
-            </p>
-          </li>
-          <li>
-            <strong
-              >Cloud Operations Engineer at Liebherr Digital Development
-              Center</strong
-            >
-            <br />
-            <small>2021 - 2022</small>
-            <p>
-              Contributed to the design and deployment of new IT infrastructure
-              projects. Provided technical support and troubleshooting for
-              system-related issues. Gained experience in managing both
-              on-premises and cloud resources.
-            </p>
-          </li>
-          <li>
-            <strong>Softwaredeveloper at Ametras metals GmbH</strong> <br />
-            <small>2018 - 2021</small>
-            <p>
-              Contributed to a Softwareproject for an ERP-System written in
-              Java. Gained my first experiences working in a technical
-              environment.
-            </p>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Skills</h2>
-        <ul>
-          <li>Linux Server Administration (Debian, SUSE)</li>
-          <li>Network Configuration (TCP/IP, DNS, DHCP, VLANs)</li>
-          <li>Scripting (Bash, Python)</li>
-          <li>Cloud Platforms (AWS, Azure)</li>
-          <li>Automation Tools (Ansible, Terraform)</li>
-          <li>Monitoring Tools (Prometheus, Grafana, Nagios)</li>
-          <li>Containerization (Docker, Kubernetes - basic understanding)</li>
-          <li>Security Best Practices</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Education</h2>
-        <ul>
-          <li>
-            <strong>Master Cloud Applications & Security Engineering</strong
-            ><br />
-            <span>Technische Hochschule Ingolstadt</span>
-          </li>
-          <li>
-            <strong>Bachelor Wirtschaftsinformatik</strong><br />
-            <span>DHBW Ravensburg</span>
-          </li>
-        </ul>
-      </section>
-      <hr />
-      <footer>
-        <p style="margin: 0">&copy; 2025 Marius Biegger</p>
-        <a
-          href="https://picocss.com/"
-          target="_blank"
-          title="Powered by Pico.css"
-          style="display: inline-flex; align-items: center"
-        >
-          <img
-            src="media/pico-logo-dark-XCR6IJWC.svg"
-            alt="Pico.css Logo"
-            style="height: 32px; width: auto"
-          />
-        </a>
-         <a href="impressum.html">Impressum</a>
-      </footer>
-    </main>
-  </body>
+    /* --- ADDED: Mobile-specific styles --- */
+    @media (max-width: 600px) {
+        body {
+            font-size: 14px;
+        }
+        #terminal {
+            padding: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div id="terminal">
+        <div id="scroll-wrapper">
+            <div id="output"></div>
+        </div>
+        <div id="input-line" class="line" style="display: none;">
+            <input type="text" id="command-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+        </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
+</body>
 </html>
