@@ -28,9 +28,11 @@ const cvData = [
     { html: `To view a printer-friendly version, run: <span class="output-item">open cv</span>` },
     { text: ' ' },
     { html: '<span class="output-title">About Me</span>' },
-    { text: 'A highly motivated and results-oriented system engineer with over 5 years of experience in designing, implementing, and managing robust IT infrastructures. Passionate about cloud technologies, automation, and DevOps practices to drive efficiency and innovation. Currently pursuing a dual Master\'s degree in Cloud Applications & Security Engineering alongside a role at Audi AG, focusing on cutting-edge automotive IT solutions.' },
+    { text: 'A highly motivated and results-oriented system engineer with over 5 years of experience in designing, implementing, and maintaining robust and scalable IT infrastructure. I possess a strong understanding of Linux systems, network protocols, and cloud technologies. I am passionate about automation and improving system efficiency through scripting and infrastructure-as-code principles.' },
     { text: ' ' },
     { html: '<span class="output-title">Career Journey</span>' },
+    { text: 'My professional path has taken me through a variety of roles and industries, each contributing to my growth as a system engineer and shaping my approach to technology and teamwork.' },
+    { text: ' ' }, // Added a space for better readability before stations
     { html: '<span class="output-item">  Dual Master Student at Audi AG (2024 - Present)</span>' },
     { html: '<span class="output-item">  System Engineer - DevOps at Vetter Pharma (2022 - 2024)</span>' },
     { html: '<span class="output-item">  Cloud Operations Engineer at Liebherr (2021 - 2022)</span>' },
@@ -115,7 +117,6 @@ export function executeCommand(input, term, state) {
                 { html: '<span class="output-title">Direct Commands:</span>' },
                 { html: '  about      Display a short bio' },
                 { html: '  cv         Display my curriculum vitae' },
-                { html: '  projects   List key projects' },
                 { html: '  social     Show social media links' },
                 { html: '  contact    Show contact information' },
                 { html: '  theme <id> Change color theme (e.g., theme light)' },
@@ -143,14 +144,6 @@ export function executeCommand(input, term, state) {
             break;
         case 'cv':
             term.print(cvData);
-            break;
-        case 'projects':
-            term.print([
-                { html: '<span class="output-title">Key Projects:</span>' },
-                { text: '  - Project Heimdall      A real-time monitoring dashboard using Prometheus & Grafana.' },
-                { text: '  - Ansible Playbooks     A public repository of automation scripts for cloud provisioning.' },
-                { text: '  - This Website          An interactive terminal portfolio built with vanilla JS.' },
-            ]);
             break;
         case 'social':
             term.print([
