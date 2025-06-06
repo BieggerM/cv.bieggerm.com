@@ -72,16 +72,21 @@ function scrollToBottom() {
 
 // --- ADDED: Mobile Viewport Logic ---
 function handleViewportResize() {
-    // This sets the terminal's actual height to match the visible screen area,
-    // effectively docking it above the keyboard.
-    terminalEl.style.height = `${window.visualViewport.height}px`;
-    scrollToBottom();
+    if (window.visualViewport) {
+        // This sets the terminal's actual height to match the visible screen area,
+        // effectively docking it above the keyboard.
+        terminalEl.style.height = `${window.visualViewport.height}px`;
+        scrollToBottom(); // Ensure the input line is visible after resize
+    }
 }
 
 function initViewportHandler() {
     // Only run this on devices that support the Visual Viewport API (most mobile browsers)
     if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', handleViewportResize);
+        // Call it once initially to set the correct height and ensure visibility
+        // This is important for the initial layout, especially on mobile.
+        handleViewportResize();
     }
 }
 // --- END ADDED ---
