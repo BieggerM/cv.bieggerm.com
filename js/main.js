@@ -30,6 +30,9 @@ function processInput(input) {
 
 // --- EVENT LISTENERS & INITIALIZATION ---
 function init() {
+    // Initialize the viewport handler for mobile keyboard support
+    term.initViewportHandler();
+
     const welcomeMessage = [
         "Welcome to my interactive terminal portfolio.",
         "Type 'help' for a list of commands to get started.",
@@ -67,17 +70,7 @@ commandInputEl.addEventListener('keydown', (e) => {
     }
 });
 
-// --- ADDED: Mobile keyboard visibility fix ---
-commandInputEl.addEventListener('focus', () => {
-    // When the input is focused, a virtual keyboard will likely appear.
-    // We give it a moment to slide up, then scroll the terminal to the bottom
-    // to ensure the input line is visible.
-    setTimeout(() => {
-        term.scrollToBottom();
-    }, 100);
-});
-// --- END ADDED ---
-
+// The old focus listener is no longer needed, as the viewport handler is more effective.
 
 // Start the application
 init();

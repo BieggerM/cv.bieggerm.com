@@ -11,7 +11,6 @@ let promptTemplate = `<span class="prompt-text">{user}@{host}:{path}$</span>`;
 let isLocked = false;
 
 function print(lines) {
-    // This function is now robust and handles strings, single objects, and arrays of objects.
     if (!Array.isArray(lines)) {
         lines = [typeof lines === 'string' ? { text: lines } : lines];
     }
@@ -37,20 +36,8 @@ function print(lines) {
     scrollToBottom();
 }
 
-async function type(lines, delay = 30) {
-    lock();
-    for (const line of lines) {
-        const lineEl = document.createElement('div');
-        lineEl.classList.add('line');
-        outputEl.appendChild(lineEl);
-        for (const char of line) {
-            lineEl.textContent += char;
-            scrollToBottom();
-            await new Promise(resolve => setTimeout(resolve, delay));
-        }
-    }
-    unlock();
-}
+// NOTE: The 'type' function has been removed as per your request to have no typing animations.
+// If you wanted to add it back for specific commands, it would go here.
 
 function clear() {
     outputEl.innerHTML = '';
@@ -83,15 +70,32 @@ function scrollToBottom() {
     scrollWrapper.scrollTop = scrollWrapper.scrollHeight;
 }
 
+// --- ADDED: Mobile Viewport Logic ---
+function handleViewportResize() {
+    // This sets the terminal's actual height to match the visible screen area,
+    // effectively docking it above the keyboard.
+    terminalEl.style.height = `${window.visualViewport.height}px`;
+    scrollToBottom();
+}
+
+function initViewportHandler() {
+    // Only run this on devices that support the Visual Viewport API (most mobile browsers)
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleViewportResize);
+    }
+}
+// --- END ADDED ---
+
 terminalEl.addEventListener('click', focus);
 
 export default {
     print,
-    type,
     clear,
     showPrompt,
     lock,
     unlock,
     locked,
-    focus
+    focus,
+    scrollToBottom,
+    initViewportHandler // Export the new function
 };
