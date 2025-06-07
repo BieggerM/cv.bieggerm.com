@@ -68,6 +68,13 @@ const profileImagePaths = [
     "media/profiles/profile8.jpg"
 ];
 
+const profileCompliments = [
+    "Looking sharp!",
+    "Nice pic!",
+    "That's a great shot!",
+    "Cool profile picture!"
+];
+
 function resolvePath(path, cwd) {
     if (path.startsWith('/')) return path;
     if (path.startsWith('~')) return `/home/guest${path.substring(1)}`;
@@ -128,7 +135,8 @@ export async function executeCommand(input, term, state) {
                 { html: '  about      Display a short bio' },
                 { html: '  cv         Display my curriculum vitae' },
                 { html: '  social     Show social media links' },
-                { html: '  profile    Display a random profile picture' },
+                { html: '  profile    Display a random picture of me - discretion is adviced' },
+                { html: '  sourcecode Open the GitHub repository for this site' },
                 { html: '  keys       Fetch and display public keys from keys.bieggerm.com' },
                 { html: '  contact    Show contact information' },
                 { html: '  theme      Change color theme (e.g., theme light)' },
@@ -177,7 +185,8 @@ export async function executeCommand(input, term, state) {
             term.print({
                 html: `<img src="${randomImageSrc}" alt="Marius Biegger - Profile Picture" style="max-width: 150px; max-height: 150px; border-radius: 8px; margin-top: 5px; margin-bottom: 5px; object-fit: cover;" />`
             });
-            term.print({ text: 'Looking sharp!' });
+            const randomCompliment = profileCompliments[Math.floor(Math.random() * profileCompliments.length)];
+            term.print({ text: randomCompliment });
             break;
         case 'keys':
             term.print({ text: 'Fetching keys from keys.bieggerm.com...' });
@@ -314,6 +323,11 @@ export async function executeCommand(input, term, state) {
             break;
         case 'sudo':
             term.print({ html: `<span class="output-error">User 'guest' is not in the sudoers file. This incident will be reported.</span>` });
+            break;
+        case 'sourcecode':
+            const repoUrl = 'https://github.com/bieggerm/bieggerm.github.io'; // Your repo URL
+            term.print(`Opening GitHub repository: ${repoUrl}...`);
+            window.open(repoUrl, '_blank');
             break;
         default:
             term.print({ html: `<span class="output-error">${command}: command not found</span>`});
