@@ -27,6 +27,28 @@ It is built from scratch using only vanilla JavaScript, HTML, and CSS, with no e
 The goal was to create a fun, memorable, and lightweight portfolio that showcases both my professional experience and my passion for building things. Feel free to explore the file system for more details.
 `
                         },
+                        // --- ADDED: impressum.txt file ---
+                        'impressum.txt': {
+                            type: 'file',
+                            owner: 'guest',
+                            content: `
+Impressum / Legal Notice
+==========================
+
+Angaben gemäß § 5 TMG:
+
+Marius Biegger
+Franz-Liszt-Straße 18
+85057 Ingolstadt
+Germany
+
+Kontakt:
+E-Mail: mail@bieggerm.com
+
+Haftungsausschluss (Disclaimer):
+Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+`
+                        },
                         'documents': {
                             type: 'dir',
                             children: {

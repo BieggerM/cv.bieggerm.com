@@ -35,7 +35,7 @@ function init() {
         { text: "Welcome to my interactive terminal portfolio." },
         { text: "Type 'help' for a list of commands to get started." },
         { text: " " },
-        { html: `Not a techie? <a href="cv.html" target="_blank" style="color: #9ece6a; text-decoration: underline;">Click here for my CV</a>. ` },
+        { html: `Not a techie? <a href="cv.html" target="_blank" style="color: #9ece6a; text-decoration: underline;">Click here for my CV</a> or type <a style="color:rgb(59, 127, 252)">open cv</a>. ` },
         { text: " " },
         { text: "Example: try typing 'help' or 'about'." }
     ];

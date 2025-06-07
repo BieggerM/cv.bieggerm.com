@@ -16,6 +16,7 @@ function stripHtml(html) {
 }
 
 function print(lines) {
+    // Ensure `lines` is always an array
     if (!Array.isArray(lines)) {
         lines = [typeof lines === 'string' ? { text: lines } : lines];
     }
@@ -27,15 +28,22 @@ function print(lines) {
         if (line.html) {
             lineEl.innerHTML = line.html;
         } else {
-            const rawTextContent = line.text || '';
-            const strippedTextContent = stripHtml(rawTextContent); // Strip HTML tags
-            const textLines = strippedTextContent.split('\n');
-            textLines.forEach((textLine, index) => {
-                lineEl.appendChild(document.createTextNode(textLine));
-                if (index < textLines.length - 1) {
-                    lineEl.appendChild(document.createElement('br'));
-                }
-            });
+            const textContent = line.text || '';
+
+            // If the line is empty or just whitespace, use a non-breaking space
+            // to ensure the line takes up vertical space.
+            if (textContent.trim() === '') {
+                lineEl.innerHTML = '&nbsp;';
+            } else {
+                // Otherwise, handle text and newlines as before
+                const textLines = textContent.split('\n');
+                textLines.forEach((textLine, index) => {
+                    lineEl.appendChild(document.createTextNode(textLine));
+                    if (index < textLines.length - 1) {
+                        lineEl.appendChild(document.createElement('br'));
+                    }
+                });
+            }
         }
         outputEl.appendChild(lineEl);
     });
