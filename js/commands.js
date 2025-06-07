@@ -347,11 +347,14 @@ Type 'help' for a full list of commands.
                 }))
             );
             break;
-        case "exit":
-            term.clear();
+        case 'exit':
             term.print("Goodbye! You can now close this tab.");
-            term.lock(); // Prevent further input
-            break;
+            setTimeout(() => {
+                document.body.innerHTML = '';
+                document.body.style.backgroundColor = 'black';
+                window.close();
+            }, 1000);
+            return true
 
         // File System Commands
         case "ls":
@@ -366,8 +369,6 @@ Type 'help' for a full list of commands.
                 return;
             }
 
-            // --- PERMISSION CHECK ADDED ---
-            // Checks if the directory is owned by 'root' and the current user isn't 'root'.
             if (node.owner === "root" && state.user !== "root" && node !== fs) {
                 term.print({
                     html: `<span class="output-error">ls: cannot open directory '${pathArg}': Permission denied</span>`,

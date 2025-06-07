@@ -23,8 +23,13 @@ async function processInput(input) {
         state.historyIndex = -1;
     }
 
-    await executeCommand(input, term, state);
-    term.showPrompt(state); // This will now position the input line at the bottom of output
+    const suppressPrompt = await executeCommand(input, term, state);
+    term.unlock();
+    
+    // It now CHECKS the value. If suppressPrompt is true, it will NOT show a new prompt.
+    if (!suppressPrompt) {
+        term.showPrompt(state);
+    }
 }
 
 
