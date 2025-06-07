@@ -243,6 +243,7 @@
             <li>Monitoring Tools (Prometheus, Grafana, Nagios)</li>
             <li>Containerization (Docker, Kubernetes)</li>
             <li>Security Best Practices</li>
+            <li>Vibe Coding 😎</li>
           </ul>
         </section>
 
@@ -318,25 +319,25 @@
                   if (messageIndex < bootMessages.length - 1) {
                       lineElement.classList.remove('is-typing');
                   }
+                  // currentMessage is the message that just finished typing.
                   messageIndex++;
-                  setTimeout(typeLine, delayBeforeNextLine);
+
+                  if (currentMessage === "./cv-static ") {
+                    // After "./cv-static " is typed, wait 1 second with blinking cursor,
+                    // then call typeLine, which will trigger the content reveal.
+                    setTimeout(typeLine, 1000);
+                  } else {
+                    // For other messages, use the standard calculated delay.
+                    setTimeout(typeLine, delayBeforeNextLine);
+                  }
                 }
               };
               typeChar();
 
             } else {
               greeterContainer.style.opacity = '0';
-              greeterContainer.style.transition = 'opacity 1s ease-out';
-
-              setTimeout(() => {
-                greeterContainer.style.display = 'none';
-                mainContent.style.display = 'block';
-                mainContent.style.opacity = '0';
-                mainContent.style.transition = 'opacity 1s ease-in';
-                setTimeout(() => {
-                  mainContent.style.opacity = '1';
-                }, 50);
-              }, 1000);
+              mainContent.style.opacity = '1';
+              mainContent.style.display = 'block';
             }
           }
 
