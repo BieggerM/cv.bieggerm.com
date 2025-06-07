@@ -4,7 +4,7 @@ import { executeCommand } from './commands.js';
 
 const commandInputEl = document.getElementById('command-input');
 
-// --- STATE ---
+
 const state = {
     user: 'guest',
     host: 'biegger.io',
@@ -14,7 +14,6 @@ const state = {
     startTime: new Date()
 };
 
-// --- CORE LOGIC ---
 async function processInput(input) {
     const promptHtml = `<span class="prompt-text">${state.user}@${state.host}:${state.cwd.replace(`/home/${state.user}`, '~')}$</span>`;
     term.print({ html: `${promptHtml} <span class="output-command">${input || ''}</span>` }); // Ensure input is not undefined if empty
@@ -28,21 +27,19 @@ async function processInput(input) {
     term.showPrompt(state); // This will now position the input line at the bottom of output
 }
 
-// --- EVENT LISTENERS & INITIALIZATION ---
+
 function init() {
-    // Initialize the viewport handler for mobile keyboard support
     term.initViewportHandler();
 
     const welcomeMessage = [
         { text: "Welcome to my interactive terminal portfolio." },
         { text: "Type 'help' for a list of commands to get started." },
         { text: " " },
-        { html: `Not a techie? <a href="cv.html" target="_blank" style="color: #9ece6a; text-decoration: underline;">Click here for my CV</a>.` },
+        { html: `Not a techie? <a href="cv.html" target="_blank" style="color: #9ece6a; text-decoration: underline;">Click here for my CV</a>. ` },
         { text: " " },
         { text: "Example: try typing 'help' or 'about'." }
     ];
 
-    // Ensure all lines are objects, either {text: ...} or {html: ...}
     const welcomeData = welcomeMessage.map(line => (typeof line === 'string' ? { text: line } : line));
     term.print(welcomeData);
     term.showPrompt(state);
@@ -73,7 +70,4 @@ commandInputEl.addEventListener('keydown', (e) => {
     }
 });
 
-// The old focus listener is no longer needed, as the viewport handler is more effective.
-
-// Start the application
 init();

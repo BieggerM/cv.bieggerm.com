@@ -10,7 +10,6 @@ const terminalEl = document.getElementById('terminal');
 let promptTemplate = `<span class="prompt-text">{user}@{host}:{path}$</span>`;
 let isLocked = false;
 
-// Utility function to strip HTML tags from a string
 function stripHtml(html) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent || "";
@@ -43,9 +42,6 @@ function print(lines) {
     scrollToBottom();
 }
 
-// NOTE: The 'type' function has been removed as per your request to have no typing animations.
-// If you wanted to add it back for specific commands, it would go here.
-
 function clear() {
     outputEl.innerHTML = '';
 }
@@ -57,53 +53,42 @@ function showPrompt(state) {
         .replace('{host}', state.host) // Use host from state
         .replace('{path}', promptPath);
     
-    // Ensure the prompt span exists or create/update it
     let promptSpan = inputLineEl.querySelector('.prompt-text');
     if (!promptSpan) {
         promptSpan = document.createElement('span');
         promptSpan.className = 'prompt-text';
-        // commandInputEl is a child of inputLineEl, so prepend promptSpan before it.
         inputLineEl.insertBefore(promptSpan, commandInputEl);
     }
-    promptSpan.innerHTML = promptContent; // Set its content
+    promptSpan.innerHTML = promptContent;
 
-    // Move inputLineEl to be the last child of outputEl
-    // This makes the prompt appear after all previous output.
     outputEl.appendChild(inputLineEl);
 
     inputLineEl.style.display = 'flex';
     commandInputEl.focus();
-    scrollToBottom(); // Ensure the new prompt line is visible
+    scrollToBottom();
 }
 
 function scrollToBottom() {
     scrollWrapper.scrollTop = scrollWrapper.scrollHeight;
 }
 
-// --- ADDED: Mobile Viewport Logic ---
 function handleViewportResize() {
     if (window.visualViewport) {
-        // This sets the terminal's actual height to match the visible screen area,
-        // effectively docking it above the keyboard.
         terminalEl.style.height = `${window.visualViewport.height}px`;
-        scrollToBottom(); // Ensure the input line is visible after resize
+        scrollToBottom();
     }
 }
 
 function initViewportHandler() {
-    // Only run this on devices that support the Visual Viewport API (most mobile browsers)
     if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', handleViewportResize);
-        // Call it once initially to set the correct height and ensure visibility
-        // This is important for the initial layout, especially on mobile.
         handleViewportResize();
     }
 }
-// --- END ADDED ---
+
 
 terminalEl.addEventListener('click', focus);
 
-// --- Helper functions for lock, unlock, locked, focus ---
 function lock() { isLocked = true; }
 function unlock() { isLocked = false; }
 function locked() { return isLocked; }

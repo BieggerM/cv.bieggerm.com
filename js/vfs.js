@@ -1,7 +1,7 @@
 // js/vfs.js
 
 export const fs = {
-    type: 'dir', // The root itself is a directory
+    type: 'dir',
     children: {
         'home': {
             type: 'dir',
@@ -13,6 +13,19 @@ export const fs = {
                             type: 'file',
                             content: `Welcome to my interactive terminal portfolio.
 Type 'help' for a list of commands to get started.`
+                        },
+                     
+                        'about.txt': {
+                            type: 'file',
+                            content: `
+About This Project
+==================
+This website is an interactive terminal portfolio designed to simulate a Unix-like shell environment.
+
+It is built from scratch using only vanilla JavaScript, HTML, and CSS, with no external libraries or frameworks. The project features a virtual file system that you can navigate using commands like 'ls', 'cd', and 'cat'.
+
+The goal was to create a fun, memorable, and lightweight portfolio that showcases both my professional experience and my passion for building things. Feel free to explore the file system for more details.
+`
                         },
                         'documents': {
                             type: 'dir',
@@ -80,9 +93,88 @@ Stations:
                 }
             }
         },
-        'bin': {
+               'root': { // Home directory for the root user
             type: 'dir',
-            children: {}
+            owner: 'root',
+            children: {
+                '.bash_history': {
+                    type: 'file',
+                    owner: 'root',
+                    content: 'sudo rm -rf / --no-preserve-root'
+                }
+            }
+        },
+        'etc': {
+            type: 'dir',
+            owner: 'root',
+            children: {
+                'motd': { // Message of the Day
+                    type: 'file',
+                    owner: 'root',
+                    content: `
+Welcome to MariusBieggerOS (GNU/Linux 5.15.0 x86_64)
+
+ * Documentation:  cat /home/guest/about.txt
+ * Portfolio:      run 'cv' or 'projects'
+ * System status:  All systems are fully operational.
+
+Last login: ${new Date().toUTCString()}
+`
+                },
+                'hosts': {
+                    type: 'file',
+                    owner: 'root',
+                    content: `127.0.0.1   localhost
+::1         localhost
+127.0.1.1   biegger.io
+`
+                }
+            }
+        },
+        'var': {
+            type: 'dir',
+            owner: 'root',
+            children: {
+                'log': {
+                    type: 'dir',
+                    owner: 'root',
+                    children: {
+                        'sys.log': {
+                            type: 'file',
+                            owner: 'root',
+                            content: `Jun 07 03:23:25 kernel: Booting up...
+Jun 07 03:23:28 services: Starting portfolio daemon.
+Jun 07 03:23:30 user: Guest session started from 127.0.0.1
+Jun 07 03:23:32 kernel: All systems go.`
+                        }
+                    }
+                }
+            }
+        },
+        'proc': {
+            type: 'dir',
+            owner: 'root',
+            children: {
+                'cpuinfo': {
+                    type: 'file',
+                    owner: 'root',
+                    content: `processor   : 0
+vendor_id   : GenuineHuman
+cpu family  : 6
+model name  : Human Brain @ 2.0GHz (Coffee-Fueled)
+cache size  : 8192 KB`
+                },
+                'meminfo': {
+                    type: 'file',
+                    owner: 'root',
+                    content: `MemTotal:       16384 MB
+MemFree:        8192 MB
+MemAvailable:   12288 MB
+SwapTotal:      0 MB
+ThoughtsCached: 4096 MB`
+                }
+            }
         }
     }
 };
+  
