@@ -1,4 +1,5 @@
 # Terminal Portfolio - Interactive CV Experience
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/BieggerM/cv.bieggerm.com)
 
 An interactive terminal-style portfolio website that provides a unique command-line interface for exploring professional information. Built with vanilla JavaScript and designed to simulate a Unix-like terminal experience in the browser.
 
