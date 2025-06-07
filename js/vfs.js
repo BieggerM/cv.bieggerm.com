@@ -11,8 +11,21 @@ export const fs = {
                     children: {
                         'welcome.txt': {
                             type: 'file',
-                            content: `Welcome to my interactive terminal portfolio.
-Type 'help' for a list of commands to get started.`
+                            owner: 'guest',
+                            content: `
+   ____   _                              __  __ 
+ | __ ) ( )  __    __    __    __      |  \/  |
+ |  _ \  |  /__\  /  \  /  \  /__\ |__ | \  / |
+ | |_) | | | ___|| () || () || ___||  \| |\/| |
+ |____/  | |      \__/  \__/ |     |   | |  | |
+        (_) \__/     |     |  \__/     |_|  |_|
+                  \__/  \__/           
+                      
+Welcome to MariusBieggerOS v2.4 (Kernel: 5.15.0-biegger)
+
+* Last login: {date}
+* Your access level is: guest
+`
                         },
                      
                         'about.txt': {
@@ -103,9 +116,8 @@ Stations:
                                     type: 'file',
                                     content: `Key Projects
 ============
-- Project Heimdall: A real-time monitoring dashboard using Prometheus & Grafana.
-- Ansible Playbooks: A public repository of automation scripts for cloud provisioning.
-- This Website: An interactive terminal portfolio built with vanilla JS.`
+- This impressive terminal webapp 🤠
+- stuff i did for work, i guess`
                                 }
                             }
                         },

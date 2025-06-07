@@ -7,7 +7,7 @@ const commandInputEl = document.getElementById('command-input');
 
 const state = {
     user: 'guest',
-    host: 'biegger.io',
+    host: 'bieggerm.com',
     cwd: '/home/guest',
     history: [],
     historyIndex: -1,
@@ -31,20 +31,34 @@ async function processInput(input) {
 function init() {
     term.initViewportHandler();
 
+    const asciiArt = `
+  ____   _                              __  __ 
+ | __ ) ( )  __    __    __    __      |  \/  |
+ |  _ \  |  /__\  /  \  /  \  /__\ |__ | \  / |
+ | |_) | | | ___|| () || () || ___||  \| |\/| |
+ |____/  | |      \__/  \__/ |     |   | |  | |
+        (_) \__/     |     |  \__/     |_|  |_|
+                  \__/  \__/           
+
+`;
+
     const welcomeMessage = [
-        { text: "Welcome to my interactive terminal portfolio." },
-        { text: "Type 'help' for a list of commands to get started." },
+        { html: `<span class="output-item">${asciiArt}</span>` },
+        { text: `Welcome to BieggerMOS v2.4 (Kernel: 5.15.0-bm)` },
         { text: " " },
-        { html: `Not a techie? <a href="cv.html" target="_blank" style="color: #9ece6a; text-decoration: underline;">Click here for my CV</a> or type <a style="color:rgb(59, 127, 252)">open cv</a>. ` },
+        { text: `* System time: ${new Date().toLocaleString()}` },
+        { text: "* Your access level is: guest"},
         { text: " " },
-        { text: "Example: try typing 'help' or 'about'." }
+        { html: `Not a techie? 🤓 For a standard graphical view, <a href="cv.html" target="_blank" class="output-item">click here</a> or type '<span class="output-item">open cv</span>'.` },
+        { text: " " },
+        { text: "Type 'help' to see a list of available commands." },
+        { html: `Hint: Try '<span class="output-command">neofetch</span>' or '<span class="output-command">theme light</span>' to customize your view.` },
+        
     ];
 
-    const welcomeData = welcomeMessage.map(line => (typeof line === 'string' ? { text: line } : line));
-    term.print(welcomeData);
+    term.print(welcomeMessage);
     term.showPrompt(state);
 }
-
 commandInputEl.addEventListener('keydown', (e) => {
     if (term.locked()) return;
 

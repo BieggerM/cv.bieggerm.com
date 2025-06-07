@@ -239,10 +239,10 @@ Type 'help' for a full list of commands.
             term.print([
                 { html: '<span class="output-title">Connect with me:</span>' },
                 {
-                    html: `  - GitHub      <a href="https://github.com/bieggerm" target="_blank">github.com/bieggerm</a>`,
+                    html: `  - GitHub      <a class="output-item" href="https://github.com/bieggerm" target="_blank">github.com/bieggerm</a>`,
                 },
                 {
-                    html: `  - LinkedIn    <a href="https://www.linkedin.com/in/marius-biegger/" target="_blank">linkedin.com/in/marius-biegger</a>`,
+                    html: `  - LinkedIn    <a class="output-item" href="https://www.linkedin.com/in/bieggerm/" target="_blank">linkedin.com/in/marius-biegger</a>`,
                 },
             ]);
             break;
@@ -250,10 +250,10 @@ Type 'help' for a full list of commands.
             term.print([
                 { html: '<span class="output-title">Get in Touch:</span>' },
                 {
-                    html: `  - Email:      <a href="mailto:mail@bieggerm.com">mail@bieggerm.com</a>`,
+                    html: `  - Email:      <a class="output-item" href="mailto:mail@bieggerm.com">mail@bieggerm.com</a>`,
                 },
                 {
-                    html: `  - LinkedIn:   <a href="https://www.linkedin.com/in/marius-biegger/" target="_blank">linkedin.com/in/marius-biegger</a>`,
+                    html: `  - LinkedIn:   <a class="output-item" href="https://www.linkedin.com/in/bieggerm/" target="_blank">linkedin.com/in/marius-biegger</a>`,
                 },
             ]);
             break;
@@ -326,8 +326,8 @@ Type 'help' for a full list of commands.
                     {
                         html: '<span class="output-neofetch-title">----------------------------</span>',
                     },
-                    { text: `OS:     MariusBieggerOS (Web-Based)` },
-                    { text: `Kernel: Linux & Cloud Automation` },
+                    { text: `OS:     BieggerMOS v2.4 (Web-Based)` },
+                    { text: `Kernel: 5.15.0-bm` },
                     { text: `Title:  System Engineer` },
                     { text: `Based:  Ingolstadt, Germany` },
                     { text: ` Uptime: ${getUptime(state.startTime)}` },
