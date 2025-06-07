@@ -10,6 +10,12 @@ const terminalEl = document.getElementById('terminal');
 let promptTemplate = `<span class="prompt-text">{user}@{host}:{path}$</span>`;
 let isLocked = false;
 
+// Utility function to strip HTML tags from a string
+function stripHtml(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+}
+
 function print(lines) {
     if (!Array.isArray(lines)) {
         lines = [typeof lines === 'string' ? { text: lines } : lines];
@@ -22,8 +28,9 @@ function print(lines) {
         if (line.html) {
             lineEl.innerHTML = line.html;
         } else {
-            const textContent = line.text || '';
-            const textLines = textContent.split('\n');
+            const rawTextContent = line.text || '';
+            const strippedTextContent = stripHtml(rawTextContent); // Strip HTML tags
+            const textLines = strippedTextContent.split('\n');
             textLines.forEach((textLine, index) => {
                 lineEl.appendChild(document.createTextNode(textLine));
                 if (index < textLines.length - 1) {

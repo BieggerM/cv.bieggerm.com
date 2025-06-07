@@ -15,7 +15,7 @@ const state = {
 };
 
 // --- CORE LOGIC ---
-function processInput(input) {
+async function processInput(input) {
     const promptHtml = `<span class="prompt-text">${state.user}@${state.host}:${state.cwd.replace(`/home/${state.user}`, '~')}$</span>`;
     term.print({ html: `${promptHtml} <span class="output-command">${input || ''}</span>` }); // Ensure input is not undefined if empty
     
@@ -24,7 +24,7 @@ function processInput(input) {
         state.historyIndex = -1;
     }
 
-    executeCommand(input, term, state);
+    await executeCommand(input, term, state);
     term.showPrompt(state); // This will now position the input line at the bottom of output
 }
 
