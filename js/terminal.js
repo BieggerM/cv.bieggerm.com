@@ -45,26 +45,29 @@ function clear() {
 
 function showPrompt(state) {
     const promptPath = state.cwd.replace(`/home/${state.user}`, '~');
-    const prompt = promptTemplate
+    const promptContent = promptTemplate
         .replace('{user}', state.user)
-        .replace('{host}', 'biegger.io')
+        .replace('{host}', state.host) // Use host from state
         .replace('{path}', promptPath);
     
-    const existingPrompt = inputLineEl.querySelector('.prompt-text');
-    if (existingPrompt) {
-        inputLineEl.removeChild(existingPrompt);
+    // Ensure the prompt span exists or create/update it
+    let promptSpan = inputLineEl.querySelector('.prompt-text');
+    if (!promptSpan) {
+        promptSpan = document.createElement('span');
+        promptSpan.className = 'prompt-text';
+        // commandInputEl is a child of inputLineEl, so prepend promptSpan before it.
+        inputLineEl.insertBefore(promptSpan, commandInputEl);
     }
-    
-    inputLineEl.insertAdjacentHTML('afterbegin', prompt);
+    promptSpan.innerHTML = promptContent; // Set its content
+
+    // Move inputLineEl to be the last child of outputEl
+    // This makes the prompt appear after all previous output.
+    outputEl.appendChild(inputLineEl);
+
     inputLineEl.style.display = 'flex';
     commandInputEl.focus();
+    scrollToBottom(); // Ensure the new prompt line is visible
 }
-
-function lock() { isLocked = true; }
-function unlock() { isLocked = false; }
-function locked() { return isLocked; }
-
-function focus() { commandInputEl.focus(); }
 
 function scrollToBottom() {
     scrollWrapper.scrollTop = scrollWrapper.scrollHeight;
@@ -92,6 +95,12 @@ function initViewportHandler() {
 // --- END ADDED ---
 
 terminalEl.addEventListener('click', focus);
+
+// --- Helper functions for lock, unlock, locked, focus ---
+function lock() { isLocked = true; }
+function unlock() { isLocked = false; }
+function locked() { return isLocked; }
+function focus() { commandInputEl.focus(); }
 
 export default {
     print,
