@@ -129,7 +129,7 @@ export function executeCommand(input, term, state) {
                 { html: '  about      Display a short bio' },
                 { html: '  cv         Display my curriculum vitae' },
                 { html: '  social     Show social media links' },
-                { html: '  profile    Display my profile picture' },
+                { html: '  profile    Display a random profile picture' },
                 { html: '  contact    Show contact information' },
                 { html: '  theme <id> Change color theme (e.g., theme light)' },
                 { html: '  neofetch   Display system info' },
