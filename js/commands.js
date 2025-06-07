@@ -183,8 +183,9 @@ function getUptime(startTime) {
 
 export async function executeCommand(input, term, state) {
     const [command, ...args] = input.split(" ").filter((i) => i);
-    if (!command) return;
+    if (!command) return false; // No command, so don't suppress prompt
 
+    let suppressPrompt = false;
     switch (command) {
         // Direct Commands
         case "help":
@@ -354,7 +355,7 @@ Type 'help' for a full list of commands.
                 document.body.style.backgroundColor = 'black';
                 window.close();
             }, 1000);
-            return true
+            suppressPrompt = true;
 
         // File System Commands
         case "ls":
@@ -458,7 +459,12 @@ Type 'help' for a full list of commands.
                 linkedin: "https://www.linkedin.com/in/marius-biegger/",
                 keys: "https://keys.bieggerm.com",
             };
-            if (links[target]) {
+
+            if (target === "cv") {
+                term.print("Opening graphical CV in a new tab...");
+                window.open("cv.html", "_blank");
+                // No longer suppress prompt, a new prompt will appear after this.
+            } else if (links[target]) {
                 term.print(`Opening ${target}...`);
                 window.open(links[target], "_blank");
             } else {
@@ -491,4 +497,5 @@ Type 'help' for a full list of commands.
             });
             break;
     }
+    return suppressPrompt;
 }

@@ -3,7 +3,7 @@ import term from './terminal.js';
 import { executeCommand } from './commands.js';
 
 const commandInputEl = document.getElementById('command-input');
-
+const outputEl = document.getElementById('output');
 
 const state = {
     user: 'guest',
@@ -14,7 +14,34 @@ const state = {
     startTime: new Date()
 };
 
+// Messages for the initial page load sequence (inspired by the original CV greeter)
+const pageLoadBootMessages = [
+    "GNU/Linux 5.15.0-107-generic x86_64",
+    "Setting hostname: bieggerm.com...",
+    "Checking file systems... [OK]",
+    "Activating swap space... [OK]",
+    "Mounting local filesystems... [OK]",
+    "Starting kernel services... [OK]",
+    "Setting up networking interfaces (eth0)... [OK]",
+    "Initializing cloud connectivity modules... [OK]",
+    "Starting system automation services (cron, systemd)... [OK]",
+    "Loading Marius Biegger user profile (/home/guest)... [OK]",
+    "Initializing interactive terminal environment...",
+    "bash -c 'source /etc/profile && startx -- :0 vt1'" // Simulates shell start
+];
+
+async function runInitialPageLoadSequence(termInstance, messages, lineDelay = 70, finalMessageDelay = 600) {
+    termInstance.lock();
+    for (let i = 0; i < messages.length; i++) {
+        termInstance.print(messages[i]);
+        await new Promise(resolve => setTimeout(resolve, (i === messages.length - 1) ? finalMessageDelay : lineDelay));
+    }
+    termInstance.unlock();
+}
+
 async function processInput(input) {
+    term.hidePrompt(); // Hide the current input line before processing
+
     const promptHtml = `<span class="prompt-text">${state.user}@${state.host}:${state.cwd.replace(`/home/${state.user}`, '~')}$</span>`;
     term.print({ html: `${promptHtml} <span class="output-command">${input || ''}</span>` }); // Ensure input is not undefined if empty
     
@@ -33,8 +60,14 @@ async function processInput(input) {
 }
 
 
-function init() {
+async function init() {
     term.initViewportHandler();
+    term.hidePrompt(); // Hide prompt at the very beginning
+
+    // Run the initial "boot" sequence
+    await runInitialPageLoadSequence(term, pageLoadBootMessages);
+
+    term.clear(); // Clear the screen after the boot sequence
 
     const asciiArt = `
   ____   _                              __  __ 
@@ -54,15 +87,15 @@ function init() {
         { text: `* System time: ${new Date().toLocaleString()}` },
         { text: "* Your access level is: guest"},
         { text: " " },
-        { html: `Not a techie? 🤓 For a standard graphical view, <a href="cv.html" target="_blank" class="output-item">click here</a> or type '<span class="output-item">open cv</span>'.` },
+        { html: `Not a techie? 🤓 For a standard graphical view, <a href="#" data-command="open cv" class="output-item command-link">click here</a> or type '<span class="output-command">open cv</span>'.` },
         { text: " " },
         { text: "Type 'help' to see a list of available commands." },
-        { html: `Hint: Try '<span class="output-command">neofetch</span>' or '<span class="output-command">theme light</span>' to customize your view.` },
+        { html: `Hint: Try '<span class="output-command">neofetch</span>' or '<span class="output-command">theme light</span>' to customize your view.` }
         
     ];
 
     term.print(welcomeMessage);
-    term.showPrompt(state);
+    term.showPrompt(state); // Finally, show the interactive prompt
 }
 commandInputEl.addEventListener('keydown', (e) => {
     if (term.locked()) return;
@@ -85,6 +118,21 @@ commandInputEl.addEventListener('keydown', (e) => {
         } else {
             state.historyIndex = -1;
             commandInputEl.value = '';
+        }
+    }
+});
+
+// Event listener for command links within the output
+outputEl.addEventListener('click', (e) => {
+    const targetLink = e.target.closest('.command-link'); // Handles clicks on <a> or its children
+    if (targetLink) {
+        e.preventDefault();
+        const command = targetLink.dataset.command;
+        if (command && !term.locked()) {
+            // Clear the actual input field to simulate the command being "taken over"
+            commandInputEl.value = ''; 
+            // processInput will handle echoing the command, adding to history, and execution
+            processInput(command);
         }
     }
 });

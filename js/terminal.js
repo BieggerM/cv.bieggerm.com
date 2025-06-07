@@ -71,6 +71,12 @@ function showPrompt(state) {
     scrollToBottom();
 }
 
+function hidePrompt() {
+    if (inputLineEl) {
+        inputLineEl.style.display = 'none';
+    }
+}
+
 function scrollToBottom() {
     scrollWrapper.scrollTop = scrollWrapper.scrollHeight;
 }
@@ -100,6 +106,7 @@ function focus() { commandInputEl.focus(); }
 export default {
     print,
     clear,
+    hidePrompt,
     showPrompt,
     lock,
     unlock,

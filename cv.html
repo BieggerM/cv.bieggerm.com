@@ -53,65 +53,18 @@
         box-shadow: none;
         padding: 0;
       }
-
-      .profile-img {
-        border-radius: 50%;
-        width: 160px;
-        height: 160px;
-      }
       footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
 
-      #greeter-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #222;
-        color: #0f0;
-        z-index: 9999;
-        font-family: 'Fira Mono', 'JetBrains Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
-        font-size: 1.2em;
-        padding: 20px;
-        box-sizing: border-box;
-        overflow-y: auto;
-        overflow-x: hidden;
-      }
-
-      .greeter-line {
-        white-space: pre;
-      }
-
-      .is-typing {
-        border-right: 0.15em solid #0f0;
-        animation: blink-caret 0.75s step-end infinite;
-      }
-      
-      @keyframes blink-caret {
-        from, to { border-color: transparent }
-        50% { border-color: #0f0; }
-      }
-
-      /* MODIFIED: Main content is now hidden by default to allow the greeter to show first */
-      #main-content {
-        display: none;
-      }
+     
     </style>
   </head>
 
   <body>
-    <div id="greeter-container">
-      </div>
-
-    <div id="main-content">
+    <div id="main-content"> <!-- Ensure this is displayed by default -->
       <main>
         <h1>Marius Biegger</h1>
         <section>
@@ -269,88 +222,5 @@
       </main>
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const greeterContainer = document.getElementById('greeter-container');
-        const mainContent = document.getElementById('main-content');
-
-        // Check if the greeter container exists and is not explicitly hidden
-        if (greeterContainer && greeterContainer.style.display !== 'none') {
-          const bootMessages = [
-            "GNU/Linux 5.15.0-107-generic x86_64",
-            "Setting hostname...",
-            "Checking file systems... ok",
-            "Activating swap... ok",
-            "Mounting local filesystems... ok",
-            "Starting kernel services...",
-            "Setting up networking interfaces...",
-            "Initializing cloud services...",
-            "Starting system automation services...",
-            "Loading Marius Biegger profile...",
-            "Presenting static CV...",
-            "./cv-static "
-          ];
-
-          let messageIndex = 0;
-
-          function typeLine() {
-            if (messageIndex < bootMessages.length) {
-              const currentMessage = bootMessages[messageIndex];
-              const lineElement = document.createElement('span');
-              lineElement.classList.add('greeter-line');
-              greeterContainer.appendChild(lineElement);
-              lineElement.classList.add('is-typing');
-
-              let typingSpeed = 3;
-              let delayBeforeNextLine = 20;
-
-              if (currentMessage === "./cv-static ") {
-                  typingSpeed = 50;
-                  delayBeforeNextLine = 150;
-              }
-
-              let currentLineCharIndex = 0;
-              const typeChar = () => {
-                if (currentLineCharIndex < currentMessage.length) {
-                  lineElement.textContent += currentMessage.charAt(currentLineCharIndex);
-                  currentLineCharIndex++;
-                  setTimeout(typeChar, typingSpeed);
-                } else {
-                  if (messageIndex < bootMessages.length - 1) {
-                      lineElement.classList.remove('is-typing');
-                  }
-                  // currentMessage is the message that just finished typing.
-                  messageIndex++;
-
-                  if (currentMessage === "./cv-static ") {
-                    // After "./cv-static " is typed, wait 1 second with blinking cursor,
-                    // then call typeLine, which will trigger the content reveal.
-                    setTimeout(typeLine, 1000);
-                  } else {
-                    // For other messages, use the standard calculated delay.
-                    setTimeout(typeLine, delayBeforeNextLine);
-                  }
-                }
-              };
-              typeChar();
-
-            } else {
-              greeterContainer.style.opacity = '0';
-              greeterContainer.style.display = 'none';
-              mainContent.style.opacity = '1';
-              mainContent.style.display = 'block';
-            }
-          }
-
-          // Start the animation
-          typeLine();
-
-        } else {
-          // If the greeter is disabled, just show the main content
-          if (greeterContainer) greeterContainer.style.display = 'none';
-          if (mainContent) mainContent.style.display = 'block';
-        }
-      });
-    </script>
   </body>
 </html>
