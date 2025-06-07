@@ -1,5 +1,3 @@
-// js/data/themes.js
-
 export const themes = {
     default: {
         "--background": "#1a1b26",

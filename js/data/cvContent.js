@@ -1,5 +1,3 @@
-// js/data/cvContent.js
-
 export const cvData = [
     {
         html: '<span class="output-title">Marius Biegger - Curriculum Vitae</span>',

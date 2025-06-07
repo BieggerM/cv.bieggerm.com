@@ -1,5 +1,3 @@
-// js/utils/formatUtils.js
-
 export function getUptime(startTime) {
     const diff = Math.abs(new Date() - startTime);
     const minutes = Math.floor(diff / 60000);

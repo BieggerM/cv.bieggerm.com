@@ -8,7 +8,6 @@ let promptTemplate = `<span class="prompt-text">{user}@{host}:{path}$</span>`;
 let isLocked = false;
 
 function print(lines) {
-    // Ensure `lines` is always an array
     if (!Array.isArray(lines)) {
         lines = [typeof lines === 'string' ? { text: lines } : lines];
     }
@@ -22,12 +21,9 @@ function print(lines) {
         } else {
             const textContent = line.text || '';
 
-            // If the line is empty or just whitespace, use a non-breaking space
-            // to ensure the line takes up vertical space.
             if (textContent.trim() === '') {
                 lineEl.innerHTML = '&nbsp;';
             } else {
-                // Otherwise, handle text and newlines as before
                 const textLines = textContent.split('\n');
                 textLines.forEach((textLine, index) => {
                     lineEl.appendChild(document.createTextNode(textLine));
@@ -50,7 +46,7 @@ function showPrompt(state) {
     const promptPath = state.cwd.replace(`/home/${state.user}`, '~');
     const promptContent = promptTemplate
         .replace('{user}', state.user)
-        .replace('{host}', state.host) // Use host from state
+        .replace('{host}', state.host) 
         .replace('{path}', promptPath);
     
     let promptSpan = inputLineEl.querySelector('.prompt-text');

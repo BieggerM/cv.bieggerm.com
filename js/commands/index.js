@@ -1,4 +1,3 @@
-// js/commands/index.js
 import { fileSystemHandlers } from './handlers/fileSystem.js';
 import { informationalHandlers } from './handlers/informational.js';
 import { terminalOpsHandlers } from './handlers/terminalOps.js';

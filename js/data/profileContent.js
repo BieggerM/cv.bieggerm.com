@@ -1,5 +1,3 @@
-// js/data/profileContent.js
-
 export const profileImagePaths = [
     "media/profiles/profile.jpg",
     "media/profiles/profile1.jpg",

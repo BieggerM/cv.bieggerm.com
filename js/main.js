@@ -53,7 +53,6 @@ async function processInput(input) {
     const suppressPrompt = await executeCommand(input, term, state);
     term.unlock();
     
-    // It now CHECKS the value. If suppressPrompt is true, it will NOT show a new prompt.
     if (!suppressPrompt) {
         term.showPrompt(state);
     }
@@ -70,14 +69,13 @@ async function init() {
     term.clear(); // Clear the screen after the boot sequence
 
     const asciiArt = `
-  ____   _                              __  __ 
- | __ ) ( )  __    __    __    __      |  \/  |
- |  _ \  |  /__\  /  \  /  \  /__\ |__ | \  / |
- | |_) | | | ___|| () || () || ___||  \| |\/| |
- |____/  | |      \__/  \__/ |     |   | |  | |
-        (_) \__/     |     |  \__/     |_|  |_|
-                  \__/  \__/           
-
+ ____  _                            __  __ 
+| __ )(_) ___  __ _  __ _  ___ _ __|  \\\/  |
+|  _ \\| |/ _ \\/ _\` |/ _\` |/ _ \\ '__| |\\\/| |
+| |_) | |  __/ (_| | (_| |  __/ |  | |  | |
+|____/|_|\\___|\\__, |\\__, |\\___|_|  |_|  |_|
+              |___/ |___/                 
+              
 `;
 
     const welcomeMessage = [
@@ -124,14 +122,12 @@ commandInputEl.addEventListener('keydown', (e) => {
 
 // Event listener for command links within the output
 outputEl.addEventListener('click', (e) => {
-    const targetLink = e.target.closest('.command-link'); // Handles clicks on <a> or its children
+    const targetLink = e.target.closest('.command-link');
     if (targetLink) {
         e.preventDefault();
         const command = targetLink.dataset.command;
         if (command && !term.locked()) {
-            // Clear the actual input field to simulate the command being "taken over"
             commandInputEl.value = ''; 
-            // processInput will handle echoing the command, adding to history, and execution
             processInput(command);
         }
     }
