@@ -218,4 +218,38 @@ ThoughtsCached: 4096 MB`
         }
     }
 };
-  
+
+export function resolvePath(path, cwd) {
+    if (path.startsWith("/")) return path;
+    if (path.startsWith("~")) return `/home/guest${path.substring(1)}`; // Assuming guest is the primary user for ~
+
+    const parts = path.split("/").filter((p) => p);
+    let currentPath = cwd === "/" ? [] : cwd.split("/").filter((p) => p);
+
+    for (const part of parts) {
+        if (part === ".") continue;
+        if (part === "..") {
+            if (currentPath.length > 0) currentPath.pop();
+        } else {
+            currentPath.push(part);
+        }
+    }
+    return `/${currentPath.join("/")}`;
+}
+
+export function getNode(path, cwd) {
+    const resolvedPath = resolvePath(path, cwd);
+    if (resolvedPath === "/") return fs;
+
+    const parts = resolvedPath.split("/").filter((p) => p);
+    let currentNode = fs;
+
+    for (const part of parts) {
+        if (currentNode?.type === "dir" && currentNode.children?.[part]) {
+            currentNode = currentNode.children[part];
+        } else {
+            return null;
+        }
+    }
+    return currentNode;
+}

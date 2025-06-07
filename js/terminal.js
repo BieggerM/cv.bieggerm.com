@@ -1,6 +1,3 @@
-// js/terminal.js
-
-// DOM Elements
 const outputEl = document.getElementById('output');
 const inputLineEl = document.getElementById('input-line');
 const commandInputEl = document.getElementById('command-input');

@@ -1,6 +1,6 @@
 // js/main.js
 import term from './terminal.js';
-import { executeCommand } from './commands.js';
+import { executeCommand } from './commands/index.js';
 
 const commandInputEl = document.getElementById('command-input');
 const outputEl = document.getElementById('output');
