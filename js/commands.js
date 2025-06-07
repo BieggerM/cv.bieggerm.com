@@ -2,6 +2,7 @@
 
 import { fs } from "./vfs.js";
 
+
 // --- DATA for Direct Commands ---
 
 const themes = {
@@ -119,6 +120,11 @@ const profileCompliments = [
     "Cool profile picture!",
 ];
 
+function stripHtml(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+}
+
 function resolvePath(path, cwd) {
     if (path.startsWith("/")) return path;
     if (path.startsWith("~")) return `/home/guest${path.substring(1)}`;
@@ -183,6 +189,9 @@ export async function executeCommand(input, term, state) {
         // Direct Commands
         case "help":
             term.print([
+                { html: "This website is an interactive portfolio designed to simulate a Unix-like terminal,"},
+                { html: "use the commands below to get started." },
+                { text: " " },
                 { html: '<span class="output-title">Direct Commands:</span>' },
                 { html: "  about      Display a short bio" },
                 { html: "  cv         Display my curriculum vitae" },
@@ -210,15 +219,18 @@ export async function executeCommand(input, term, state) {
             ]);
             break;
 
-        case "about":
-            // Extract the "About Me" section from cvData
-            const aboutMeLines = cvData.slice(
-                cvData.findIndex((line) => line.html && line.html.includes("About Me")),
-                cvData.findIndex(
-                    (line) => line.html && line.html.includes("Career Journey")
-                ) - 1 // -1 to exclude the empty line before next section
-            );
-            term.print(aboutMeLines);
+        case 'about':
+            term.print(`This website is an interactive portfolio designed to simulate a Unix-like terminal,
+built from scratch with vanilla JavaScript, HTML, and CSS.
+
+Key Features:
+  - A virtual file system you can navigate with 'ls', 'cd', and 'cat'.
+  - A command history accessible with the up/down arrow keys.
+  - Multiple color schemes. Try 'theme light' or 'theme dracula'.
+  - A mobile-friendly interface that adapts to on-screen keyboards.
+
+Type 'help' for a full list of commands.
+`);         
             break;
         case "cv":
             term.print(cvData);
@@ -268,7 +280,7 @@ export async function executeCommand(input, term, state) {
                     break;
                 }
                 const keyText = await response.text();
-                term.print({ text: keyText }); // term.print handles newlines in the text
+                term.print({ text: stripHtml(keyText) }); // term.print handles newlines in the text
             } catch (error) {
                 term.print({
                     html: `<span class="output-error">Network error fetching keys: ${error.message}</span>`,

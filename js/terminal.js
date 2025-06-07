@@ -10,11 +10,6 @@ const terminalEl = document.getElementById('terminal');
 let promptTemplate = `<span class="prompt-text">{user}@{host}:{path}$</span>`;
 let isLocked = false;
 
-function stripHtml(html) {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || "";
-}
-
 function print(lines) {
     // Ensure `lines` is always an array
     if (!Array.isArray(lines)) {

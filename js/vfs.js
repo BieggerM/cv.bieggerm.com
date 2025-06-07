@@ -17,22 +17,27 @@ Type 'help' for a list of commands to get started.`
                      
                         'about.txt': {
                             type: 'file',
-                            content: `
-About This Project
+                            content: `About This Project
 ==================
-This website is an interactive terminal portfolio designed to simulate a Unix-like shell environment.
+This website is an interactive portfolio designed to simulate a Unix-like terminal,
+built from scratch with vanilla JavaScript, HTML, and CSS.
 
-It is built from scratch using only vanilla JavaScript, HTML, and CSS, with no external libraries or frameworks. The project features a virtual file system that you can navigate using commands like 'ls', 'cd', and 'cat'.
+Key Features:
+  - A virtual file system you can navigate with 'ls', 'cd', and 'cat'.
+  - A command history accessible with the up/down arrow keys.
+  - Multiple color schemes. Try 'theme light' or 'theme dracula'.
+  - A mobile-friendly interface that adapts to on-screen keyboards.
 
-The goal was to create a fun, memorable, and lightweight portfolio that showcases both my professional experience and my passion for building things. Feel free to explore the file system for more details.
+The goal is to provide a unique way to explore my professional background.
+Use direct commands like 'cv' and 'projects', or explore the file system.
+
+Type 'help' for a full list of commands.
 `
                         },
-                        // --- ADDED: impressum.txt file ---
                         'impressum.txt': {
                             type: 'file',
                             owner: 'guest',
-                            content: `
-Impressum / Legal Notice
+                            content: `Impressum / Legal Notice
 ==========================
 
 Angaben gemäß § 5 TMG:
