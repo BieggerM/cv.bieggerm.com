@@ -193,7 +193,7 @@ export async function executeCommand(input, term, state) {
                 { html: "use the commands below to get started." },
                 { text: " " },
                 { html: '<span class="output-title">Direct Commands:</span>' },
-                { html: "  about      Display a short bio" },
+                { html: "  about      Display a description of this website" },
                 { html: "  cv         Display my curriculum vitae" },
                 { html: "  social     Show social media links" },
                 {
@@ -220,8 +220,8 @@ export async function executeCommand(input, term, state) {
             break;
 
         case 'about':
-            term.print(`This website is an interactive portfolio designed to simulate a Unix-like terminal,
-built from scratch with vanilla JavaScript, HTML, and CSS.
+            term.print(`This website is an interactive portfolio designed to simulate a Unix-like terminal.
+This has been implemented in an evening that should've been spent studying. 
 
 Key Features:
   - A virtual file system you can navigate with 'ls', 'cd', and 'cat'.

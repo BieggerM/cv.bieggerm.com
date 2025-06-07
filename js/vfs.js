@@ -91,6 +91,8 @@ Stations:
 - Monitoring Tools (Prometheus, Grafana, Nagios)
 - Containerization (Docker, Kubernetes)
 - Security Best Practices
+- Vibe Coding 😎
+
 
 [Education]
 - Master Cloud Applications & Security Engineering - Technische Hochschule Ingolstadt
@@ -112,7 +114,7 @@ Stations:
                             children: {
                                 'treasure_map.txt': {
                                     type: 'file',
-                                    content: `The real treasure was the commands we typed along the way.`
+                                    content: `The real treasure was the friends we made along the way. Also. the cake is a lie.`
                                 }
                             }
                         }
