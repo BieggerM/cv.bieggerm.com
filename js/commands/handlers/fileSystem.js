@@ -1,4 +1,3 @@
-// js/commands/handlers/fileSystem.js
 import { fs, getNode, resolvePath } from '../../vfs.js';
 
 function handleLs(args, term, state) {
@@ -40,7 +39,7 @@ function handleLs(args, term, state) {
 }
 
 function handleCd(args, term, state) {
-    const targetPathInput = args[0] || "~"; // User's input for the target path
+    const targetPathInput = args[0] || "~";
     const targetNode = getNode(targetPathInput, state.cwd); // Get the node (getNode resolves path internally)
 
     if (targetNode && targetNode.type === "dir") {

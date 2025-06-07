@@ -1,4 +1,3 @@
-// js/commands/handlers/informational.js
 import { cvData } from '../../data/cvContent.js';
 import { profileImagePaths, profileCompliments } from '../../data/profileContent.js';
 import { stripHtml } from '../../utils/domUtils.js';

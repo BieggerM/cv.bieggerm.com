@@ -1,4 +1,3 @@
-// js/commands/handlers/terminalOps.js
 import { themes } from '../../data/themes.js';
 
 function applyTheme(themeId) {
