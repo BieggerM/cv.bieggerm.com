@@ -68,6 +68,32 @@ const profileImagePaths = [
     "media/profiles/profile8.jpg"
 ];
 
+const pgpKeyData = [
+    { html: '<span class="output-title">PGP Public Key (biegger.marius@gmail.com):</span>' },
+    { text: '-----BEGIN PGP PUBLIC KEY BLOCK-----' },
+    { text: ' ' },
+    { text: 'mQENBGgkrpcBCACWcRdXOXJl9FwP0/D0y9QXXTGgy6dLzS5TQWwPW9rvlD5r0x+k' },
+    { text: 'ECqzoykZLtVx6zpBG1ee6QS06zoXXxQUEcq6jRH0fJu1uM49riRTYDey6fmwUu0d' },
+    { text: 'amt6c0Z8B+8sD95hwd+OGi7E5D0JoBwXFgXVhX2gPcLQ617WLMvmqlDWu4njkuD4' },
+    { text: 'T5dnaKi/qnUY+zQ1WJ5mTh/FJ+V5sslR5dZLqpBNKQaNz/jx2zjxdajGdQL5DeHe' },
+    { text: 'wC/oenoDfdQs1F7yQ1xebmjnPUzeGG0cWFZHEuzdSpzV4CrScgQoTyWDWfiTNxjM' },
+    { text: 'z5j4BJt0yiNsGKGSoL2h8D9tu6SlgzJrDbRXABEBAAG0Kk1hcml1cyBCaWVnZ2Vy' },
+    { text: 'KCk8YmllZ2dlci5tYXJpdXNAZ21haWwuY29tPokBVwQTAQgAQRYhBNSHEJyOPvZe' },
+    { text: 'SiioqjcsCaAg5wCgBQJoJK6XAhsvBQkDwmaeBQsJCAcCAiICBhUKCQgLAgQWAgMB' },
+    { text: 'Ah4HAheAAAoJEDcsCaAg5wCg2I0H/3hRzcuUGZDrZsWgRpmEc85VxySQMKd08R3n' },
+    { text: 'lTSimE8SgefEWdRX6D2CfackFj/8oZPvvth/HX2FzO+Bg28Ga/gHcHgjeADyPdv' },
+    { text: 'R41vSuho2n5onH+dpXmJJY6z3oW3EDdR2sT4fVgIeIflTl6zPAC5l9OVj9BnDK5V' },
+    { text: 'e6P8xwFOo9hb431V2QGy++jTGsJX07i0AgwBeM+9qigPjAozIKvPYTYqXuXate3P' },
+    { text: 'jtlCFgaZhkLriFOEWrXfqIxlFfN78t5PnzXEsHrnmh3HdnQjqEBbM4+p/jlRx6SH' },
+    { text: 'N7jcOpFa4JYLxEmfuG4ADwN7OUCJ6hnDo9KwtM8UaaNvY5HChVE=' },
+    { text: '=rBxe' },
+    { text: '-----END PGP PUBLIC KEY BLOCK-----' },
+    { text: ' ' },
+    { html: `PGP Fingerprint: <span class="output-item">D487 109C 8E3E F65E 4A28  A8AA 372C 09A0 20E7 00A1</span>` },
+    { text: ' ' },
+    { html: '<span class="output-title">SSH Public Key (marius.biegger@gmail.com):</span>' },
+    { text: 'ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAHEQAogkdCyVsQOQsjGdX8jXvVTt+yCJ9PLWQTGfE136n1hseSqF+rCtJ7OzE0HKQV5TY/o3JrXMV7xQ/tOxf7O1QAYQ+GVlZNPm2u6IbUCQ/8Rq+OU5rZQc2aWF6E/CpQ2FOsolchAjE6Svv/h08pH94VJWpc+e2UQDfeP29VGJ66bZQ== marius.biegger@gmail.com' },
+];
 
 function resolvePath(path, cwd) {
     if (path.startsWith('/')) return path;
@@ -130,8 +156,9 @@ export function executeCommand(input, term, state) {
                 { html: '  cv         Display my curriculum vitae' },
                 { html: '  social     Show social media links' },
                 { html: '  profile    Display a random profile picture' },
+                { html: '  keys       Display PGP public key' },
                 { html: '  contact    Show contact information' },
-                { html: '  theme <id> Change color theme (e.g., theme light)' },
+                { html: '  theme      Change color theme (e.g., theme light)' },
                 { html: '  neofetch   Display system info' },
                 { html: '  history    Show command history' },
                 { html: '  exit       Close the terminal' },
@@ -178,6 +205,9 @@ export function executeCommand(input, term, state) {
                 html: `<img src="${randomImageSrc}" alt="Marius Biegger - Profile Picture" style="max-width: 150px; max-height: 150px; border-radius: 8px; margin-top: 5px; margin-bottom: 5px; object-fit: cover;" />`
             });
             term.print({ text: 'Looking sharp!' });
+            break;
+        case 'keys':
+            term.print(pgpKeyData);
             break;
         case 'theme':
             const themeId = args[0];
