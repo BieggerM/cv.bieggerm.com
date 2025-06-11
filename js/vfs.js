@@ -125,7 +125,7 @@ Stations:
                             children: {
                                 'treasure_map.txt': {
                                     type: 'file',
-                                    content: `The real treasure was the friends we made along the way. Also. the cake is a lie.`
+                                    content: `The real treasure was the friends we made along the way. Also, the cake is a lie.`
                                 }
                             }
                         }
