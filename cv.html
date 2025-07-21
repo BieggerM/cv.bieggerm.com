@@ -239,10 +239,30 @@
         z-index: 7;
         padding-bottom: 5px;
       }
+
+      #cloud-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1; /* Behind everything else */
+      }
+
+      .cloud {
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+        transform: translateY(0); /* Initial state for parallax */
+        transition: transform 0.1s linear; /* Smooth parallax movement */
+      }
     </style>
   </head>
 
   <body>
+    <div id="cloud-container"></div>
     <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <!-- Header - NO CARD STYLE HERE -->
       <header class="mb-12 text-center">
@@ -495,5 +515,6 @@
       <div class="pixel-art-object pixel-big-tree"></div>
       <div class="pixel-art-object pixel-bush"></div>
     </div>
+    <script src="js/clouds.js"></script>
   </body>
 </html>
