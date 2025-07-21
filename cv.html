@@ -1,226 +1,499 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marius Biegger – Linux & Cloud Automation | CV & Portfolio</title>
-    <meta name="color-scheme" content="light" />
-    <meta
-      name="description"
-      content="Marius Biegger – Experienced Linux system engineer and cloud automation specialist. View my CV, skills, and professional journey in IT infrastructure, DevOps, and cloud platforms."
+    <title>Professional CV - Marius Biegger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <meta
-      name="keywords"
-      content="Marius Biegger, Linux, Cloud, DevOps, System Engineer, Automation, Infrastructure, CV, Portfolio, IT, Ansible, Terraform, AWS, Azure, Prometheus, Grafana, Kubernetes"
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
     />
-    <meta name="author" content="Marius Biegger" />
-    <meta
-      property="og:title"
-      content="Marius Biegger – Linux & Cloud Automation | CV & Portfolio"
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
     />
-    <meta
-      property="og:description"
-      content="Experienced Linux system engineer and cloud automation specialist. Explore my CV, skills, and professional journey."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bieggerm.github.io/" />
-    <meta
-      property="og:image"
-      content="https://bieggerm.github.io/media/profile.jpg"
-    />
-    <link rel="canonical" href="https://bieggerm.github.io/" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 
     <style>
       body {
-        max-width: 700px;
-        margin: 2rem auto;
-        font-family: 'Inter', sans-serif;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        background: #fff;
-        color: #222;
-      }
-
-      article {
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        padding: 0;
-      }
-      footer {
+        font-family: "VT323", monospace;
+        color: #333;
+        min-height: 100vh;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        background-color: #d1d5db;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
       }
 
-     
+      main {
+        flex-grow: 1;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Press Start 2P", cursive;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+        word-break: break-word;
+      }
+
+      h1 {
+        font-size: 3.75rem;
+      }
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 3.75rem;
+        }
+      }
+
+      h2 {
+        font-size: 1.75rem;
+      }
+      @media (min-width: 768px) {
+        h2 {
+          font-size: 2rem;
+        }
+      }
+
+      h3 {
+        font-size: 1.125rem;
+      }
+      @media (min-width: 768px) {
+        h3 {
+          font-size: 1.25rem;
+        }
+      }
+
+      .rounded-lg,
+      .rounded-md,
+      .rounded-full {
+        border-radius: 4px !important;
+      }
+
+      .divider {
+        height: 2px;
+        background: repeating-linear-gradient(
+          90deg,
+          #9ca3af 0px,
+          #9ca3af 2px,
+          transparent 2px,
+          transparent 4px
+        );
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .job-card {
+        background-color: #f3f4f6; /* Consistent background */
+        border: 2px solid #6b7280; /* Consistent border */
+        box-shadow: 4px 4px 0px #4b5563; /* Consistent shadow */
+        border-radius: 4px !important; /* Ensure rounded corners */
+        transition: transform 0.1s ease-out, box-shadow 0.1s ease-out; /* Hover transition */
+        will-change: transform, box-shadow;
+      }
+
+      .job-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px #4b5563;
+      }
+
+      .internship-sub-element {
+        background-color: #e5e7eb;
+        border: 2px dashed #4b5563;
+        border-radius: 4px;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .internship-sub-element .icon {
+        color: #4b5563;
+        font-size: 1.25rem;
+        margin-top: 2px;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      @media (min-width: 768px) {
+        .skills-grid {
+          justify-content: flex-start;
+        }
+      }
+
+      .skill-tag {
+        background-color: #d1d5db;
+        color: #374151;
+        padding: 4px 10px;
+        border-radius: 4px !important;
+        border: 1px solid #6b7280;
+        font-size: 0.875rem;
+        font-weight: 500;
+        box-shadow: 2px 2px 0px #4b5563; /* Skill tags have a slightly smaller shadow */
+      }
+
+      .pixel-cat-experience {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        z-index: 10;
+        top: -66px;
+        right: 10px;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+      }
+      @media (max-width: 767px) {
+        .pixel-cat-experience {
+          width: 80px;
+          height: 80px;
+          top: -52px;
+          right: 8px;
+        }
+      }
+
+      /* --- Pixel Landscape Styles --- */
+      .pixel-landscape {
+        position: relative;
+        width: 100%;
+        min-height: 200px; /* Increased height for more scenery */
+        overflow: hidden;
+        margin-top: -60px;
+      }
+
+      .pixel-grass {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 48px; /* Height of the grass tile */
+        background-image: url("media/static/tilesetgrass.png");
+        background-repeat: repeat-x;
+        background-size: auto 100%;
+        z-index: 5;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+      }
+
+      .pixel-art-object {
+        position: absolute;
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: 6;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+      }
+
+      .pixel-small-tree {
+        bottom: 40px; /* Positioned on top of the grass */
+        left: 15%;
+        width: 80px;
+        height: 120px;
+        background-image: url("media/static/smalltree.png");
+      }
+
+      .pixel-big-tree {
+        bottom: 2px;
+        right: 10%;
+        width: 120px;
+        height: 180px;
+        background-image: url("media/static/tree.png");
+      }
+
+      .pixel-bush {
+        bottom: 48px;
+        left: 40%;
+        width: 60px;
+        height: 40px;
+        background-image: url("media/static/bush.png");
+      }
+
+
+      @media (min-width: 768px) {
+        .pixel-small-tree {
+          left: 20%;
+        }
+        .pixel-big-tree {
+          right: 15%;
+        }
+        .pixel-bush {
+            left: 40%;
+        }
+      }
+
+      .site-footer .max-w-4xl {
+        position: relative;
+        z-index: 7;
+        padding-bottom: 5px;
+      }
     </style>
   </head>
 
   <body>
-    <div id="main-content"> <!-- Ensure this is displayed by default -->
-      <main>
-        <h1>Marius Biegger</h1>
-        <section>
-          <h2>About Me</h2>
-          <p>
-            System engineer with over 5
-            years of experience in designing, implementing, and maintaining robust
-            and scalable IT infrastructure. I possess a strong understanding of
-            Linux systems, network protocols, and cloud technologies. I am
-            passionate about automation and improving system efficiency through
-            scripting and infrastructure-as-code principles.
+    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <!-- Header - NO CARD STYLE HERE -->
+      <header class="mb-12 text-center">
+        <h1 class="font-bold text-gray-800 mb-2">MARIUS BIEGGER</h1>
+        <p class="text-gray-500 text-base md:text-lg px-2">
+          Ingolstadt, Germany
+        </p>
+
+        <!-- Social Links -->
+        <div class="flex justify-center space-x-4 mt-4">
+          <a href="https://github.com/bieggerm" class="text-gray-500 hover:text-gray-800">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="https://linkedin.com/in/bieggerm" class="text-gray-500 hover:text-blue-600">
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a
+            href="mailto:mail@bieggerm.com"
+            class="text-gray-500 hover:text-gray-800"
+          >
+            <i class="fas fa-envelope text-xl"></i>
+          </a>
+        </div>
+      </header>
+
+      <div class="divider"></div>
+
+      <!-- Work Experience Section -->
+      <section class="mb-12">
+        <h2
+          class="font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200"
+        >
+          WORK EXPERIENCE
+        </h2>
+
+        <!-- Job 1: Audi AG - ADDED job-card here to ensure consistency -->
+        <div
+          class="job-card p-4 sm:p-6 mb-6"
+        >
+          <div
+            class="flex flex-col md:flex-row md:justify-between md:items-center mb-2"
+          >
+            <h3 class="font-medium text-gray-800">Dual Master Student</h3>
+            <span class="text-gray-500 text-sm md:text-base"
+              >2024 - Present</span
+            >
+          </div>
+          <p class="text-gray-600 font-medium mb-3">Audi AG</p>
+          <p class="text-gray-600 text-sm md:text-base">
+            Working on a dual master's program in cloud applications and security
+            engineering. Broadening my knowledge in data infrastructure while
+            getting hands-on experience at Audi AG.
           </p>
-        </section>
 
-        <section>
-          <h2>Career Journey</h2>
-          <p>
-            My professional path has taken me through a variety of roles and
-            industries, each contributing to my growth as a system engineer and
-            shaping my approach to technology and teamwork.
+          <!-- Internship Sub-Element -->
+          <div class="internship-sub-element">
+            <div class="icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <div>
+              <p class="text-gray-700 font-medium mb-1">
+                Internship: 3-month at Seat:Code in Barcelone
+              </p>
+              <p class="text-gray-600 text-xs md:text-sm">
+                Expected to join Seat:Code Innovation Team as a Software Developer
+                (2025). Focus on hands-on coding up prototypes and MVPs. Apparently using AI assisted tooling.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job 2: Vetter Pharma - Already has job-card -->
+        <div
+          class="job-card p-4 sm:p-6 mb-6 relative"
+        >
+          <div
+            class="flex flex-col md:flex-row md:justify-between md:items-center mb-2"
+          >
+            <h3 class="font-medium text-gray-800">System Engineer - DevOps</h3>
+            <span class="text-gray-500 text-sm md:text-base"
+              >2022 - 2024</span
+            >
+          </div>
+          <p class="text-gray-600 font-medium mb-3">Vetter Pharma</p>
+          <p class="text-gray-600 text-sm md:text-base">
+            Automated and maintained Linux servers and cloud environments
+            (Azure). Led automation projects and helped improve system security
+            and reliability.
           </p>
-          <h3>Stations</h3>
-          
-          <article style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
-            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
-              <img
-                src="media/audi-logo.png"
-                alt="Audi AG Logo"
-                style="
-                  width: 64px;
-                  height: 64px;
-                  object-fit: contain;
-                  border-radius: 8px;
-                "
-              />
-            </figure>
-            <aside style="flex: 1;">
-              <header>
-                <strong style="font-size: 1.1em;">Dual Master Student at Audi AG</strong>
-              </header>
-              <div style="color: #888; font-size: 0.95em; margin-bottom: 0.5em;">2024 - Present</div>
-              <div>
-                Currently taking part in a dual master's program focused on cloud applications and security engineering. I'm broadening my knowledge in areas like distributed systems and data infrastructure while gaining practical experience at Audi AG.
-              </div>
-            </aside>
-          </article>
-
-          <article style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
-            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
-              <img
-                src="media/vetter-pharma.svg"
-                alt="Vetter Pharma Logo"
-                style="
-                  width: 64px;
-                  height: 64px;
-                  object-fit: contain;
-                  border-radius: 8px;
-                "
-              />
-            </figure>
-            <aside style="flex: 1;">
-              <header>
-                <strong style="font-size: 1.1em;">System Engineer - DevOps at Vetter Pharma</strong>
-              </header>
-              <div style="color: #888; font-size: 0.95em; margin-bottom: 0.5em;">2022 - 2024</div>
-              <div>
-                Responsible for automating and maintaining the company's Linux-based server infrastructure and cloud environments (Azure). Led the implementation of automation initiatives and played a key role in improving system security and reliability.
-              </div>
-            </aside>
-          </article>
-
-          <article style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
-            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
-              <img
-                src="media/Liebherr-Logo.svg.png"
-                alt="Liebherr Digital Development Center Logo"
-                style="
-                  width: 64px;
-                  height: 64px;
-                  object-fit: contain;
-                  border-radius: 8px;
-                "
-              />
-            </figure>
-            <aside style="flex: 1;">
-              <header>
-                <strong style="font-size: 1.1em;">Cloud Operations Engineer at Liebherr Digital Development Center</strong>
-              </header>
-              <div style="color: #888; font-size: 0.95em; margin-bottom: 0.5em;">2021 - 2022</div>
-              <div>
-                Contributed to the design and deployment of new IT infrastructure projects. Provided technical support and troubleshooting for system-related issues. Gained experience in managing both on-premises and cloud resources.
-              </div>
-            </aside>
-          </article>
-
-          <article style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-            <figure style="margin: 0; flex-shrink: 0; width: 64px;">
-              <img
-                src="media/ametras__01_metals.png"
-                alt="Ametras metals GmbH Logo"
-                style="
-                  width: 64px;
-                  height: 64px;
-                  object-fit: contain;
-                  border-radius: 8px;
-                "
-              />
-            </figure>
-            <aside style="flex: 1;">
-              <header>
-                <strong style="font-size: 1.1em;">Softwaredeveloper at Ametras metals GmbH</strong>
-              </header>
-              <div style="color: #888; font-size: 0.95em; margin-bottom: 0.5em;">2018 - 2021</div>
-              <div>
-                Contributed to a Softwareproject for an ERP-System written in Java. Gained my first experiences working in a technical environment.
-              </div>
-            </aside>
-          </article>
-        </section>
-
-        <section>
-          <h2>Skills</h2>
-          <ul>
-            <li>Linux Server Administration (Debian, SUSE)</li>
-            <li>Network Configuration (TCP/IP, DNS, DHCP, VLANs)</li>
-            <li>Scripting (Bash, Python)</li>
-            <li>Cloud Platforms (AWS, Azure)</li>
-            <li>Automation Tools (Ansible, Terraform)</li>
-            <li>Monitoring Tools (Prometheus, Grafana, Nagios)</li>
-            <li>Containerization (Docker, Kubernetes)</li>
-            <li>Security Best Practices</li>
-            <li>Vibe Coding 😎</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Education</h2>
-          <ul>
+          <ul class="list-disc list-inside text-gray-600 mt-2 text-sm md:text-base">
+            <li>Built and enabled the company's cloud infrastructure.</li>
+            <li>Empowered teams to work efficiently with infrastructure.</li>
             <li>
-              <strong>Master Cloud Applications & Security Engineering</strong
-              ><br />
-              <span>Technische Hochschule Ingolstadt</span>
-            </li>
-            <li>
-              <strong>Bachelor Wirtschaftsinformatik</strong><br />
-              <span>DHBW Ravensburg</span>
+              Significantly reduced deployment times through the implementation of
+              Ansible.
             </li>
           </ul>
-        </section>
-        <hr />
-        <footer>
-          <p style="margin: 0">&copy; 2025 Marius Biegger</p>
-          <a href="impressum.html">Impressum</a>
-        </footer>
+          <img
+            src="media/static/cat2.gif"
+            alt="Animated Pixel Art Cat Sleeping"
+            class="pixel-cat-experience"
+          />
+        </div>
+
+        <!-- Job 3: Liebherr Digital Development Center - ADDED job-card -->
+        <div
+          class="job-card p-4 sm:p-6 mb-6"
+        >
+          <div
+            class="flex flex-col md:flex-row md:justify-between md:items-center mb-2"
+          >
+            <h3 class="font-medium text-gray-800">Cloud Operations Engineer</h3>
+            <span class="text-gray-500 text-sm md:text-base"
+              >2021 - 2022</span
+            >
+          </div>
+          <p class="text-gray-600 font-medium mb-3">
+            Liebherr Digital Development Center
+          </p>
+          <p class="text-gray-600 text-sm md:text-base">
+            Helped design and deploy new IT infrastructure projects. Provided
+            technical support and troubleshooting for system issues. Managed both
+            on-premises and cloud resources.
+          </p>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Skills Section - NO CARD STYLE HERE -->
+      <section class="mb-12">
+        <h2 class="font-semibold text-gray-800 mb-6">SKILLS</h2>
+        <div class="skills-grid">
+          <span class="skill-tag"
+            >Linux Server Administration (Debian, SUSE)</span
+          >
+          <span class="skill-tag"
+            >Network Configuration (TCP/IP, DNS, DHCP, VLANs)</span
+          >
+          <span class="skill-tag">Scripting (Bash, Python)</span>
+          <span class="skill-tag">Cloud Platforms (AWS, Azure)</span>
+          <span class="skill-tag">Automation Tools (Ansible, Terraform)</span>
+          <span class="skill-tag"
+            >Monitoring Tools (Prometheus, Grafana, Nagios)</span
+          >
+          <span class="skill-tag">Containerization (Docker, Kubernetes)</span>
+          <span class="skill-tag">Security Best Practices</span>
+          <span class="skill-tag">Vibe Coding 😎</span>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Education Section -->
+      <section class="mb-12">
+        <h2 class="font-semibold text-gray-800 mb-6">EDUCATION</h2>
+
+        <!-- Master's Degree - ADDED job-card -->
+        <div
+          class="job-card p-4 sm:p-6 mb-6"
+        >
+          <div
+            class="flex flex-col md:flex-row md:justify-between md:items-center mb-2"
+          >
+            <h3 class="font-medium text-gray-800">
+              Master in Cloud Applications & Security Engineering
+            </h3>
+            <span class="text-gray-500 text-sm md:text-base"
+              >2024 - 2026</span
+            >
+          </div>
+          <p class="text-gray-600 font-medium">Technische Hochschule Ingolstadt</p>
+          <p class="text-gray-600 mt-2 text-sm md:text-base">
+            This program has been a pivotal experience, bringing together the
+            theoretical and practical aspects of cloud and security in a way that
+            truly resonated. It's not just about the curriculum; it's the
+            culmination of diverse experiences that has allowed me to connect the
+            dots and finally feel like I'm "getting it" in this field.
+          </p>
+        </div>
+
+        <!-- Bachelor's Degree - Already has job-card -->
+        <div
+          class="job-card p-4 sm:p-6"
+        >
+          <div
+            class="flex flex-col md:flex-row md:justify-between md:items-center mb-2"
+          >
+            <h3 class="font-medium text-gray-800">Bachelor in Wirtschaftsinformatik</h3>
+            <span class="text-gray-500 text-sm md:text-base"
+              >2018 - 2021</span
+            >
+          </div>
+          <p class="text-gray-600 font-medium mb-3">DHBW Ravensburg</p>
+          <p class="text-gray-600 text-sm md:text-base">
+            During my Bachelor's studies, I gained my first technical work
+            experience as a Software Developer at Ametras metals GmbH (2018 -
+            2021), working on a software project for an ERP system written in
+            Java.
+          </p>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Side Projects -->
+      <section>
+        <h2 class="font-semibold text-gray-800 mb-6">FUN THINGS I DREAMED UP</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div
+            class="job-card p-4 sm:p-6"
+          >
+            <h3 class="font-medium text-gray-800 mb-2">Project Chimera</h3>
+            <p class="text-gray-600 mb-3 text-sm md:text-base">
+              A boring "adventure in a unix environmen". It's a fully functional unix environment
+              in you browser where you solve a mystery. Cool tech, but the story and game design are 'meh'.
+            </p>
+            <a
+              href="https://projectchimera.xyz"
+              class="text-blue-600 hover:text-blue-800 flex items-center text-sm md:text-base"
+            >
+              <i class="fas fa-external-link-alt mr-2"></i> Visit Project
+            </a>
+          </div>
+
+          <div
+            class="job-card p-4 sm:p-6"
+          >
+            <h3 class="font-medium text-gray-800 mb-2">D.I.B Money</h3>
+            <p class="text-gray-600 mb-3 text-sm md:text-base">
+              Short for "Did I Burn Money?". A simple wrapper around an LLM that gives you 
+              a snarky evalutation of how dumb your recent purchase was. Cathartic, maybe. 
+            </p>
+            <a
+              href="https://dib.money"
+              class="text-blue-600 hover:text-blue-800 flex items-center text-sm md:text-base"
+            >
+              <i class="fas fa-external-link-alt mr-2"></i> Visit Project
+            </a>
+          </div>
+        </div>
+      </section>
+
       </main>
-    </div>
 
+    <div class="pixel-landscape">
+      <div class="pixel-grass"></div>
+      <div class="pixel-art-object pixel-small-tree"></div>
+      <div class="pixel-art-object pixel-big-tree"></div>
+      <div class="pixel-art-object pixel-bush"></div>
+    </div>
   </body>
 </html>
