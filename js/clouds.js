@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cloudEl.style.position = 'absolute';
         cloudEl.style.top = `${Math.random() * 60 + 10}vh`; // Random vertical position
         cloudEl.style.left = `${Math.random() * 110 - 10}vw`; // Start anywhere from -10vw to 100vw
-        cloudEl.style.width = `${Math.random() * 100 + 50}px`; // Random size
-        cloudEl.style.zIndex = Math.floor(Math.random() * 3) + 1; // Different z-index for parallax layers
+        cloudEl.style.width = `${Math.random() * 150 + 75}px`; // Random size (toned down)
+        cloudEl.style.zIndex = Math.floor(Math.random() * 2) + 1; // Different z-index for parallax layers (closer range)
         cloudEl.style.opacity = 0.8; 
         cloudEl.style.imageRendering = 'pixelated';
         cloudContainer.appendChild(cloudEl);
