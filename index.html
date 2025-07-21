@@ -3,90 +3,312 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marius Biegger – Choose Your Path</title>
-    <meta name="description" content="Choose your path to view Marius Biegger's CV."/>
+    <title>Marius Biegger – Choose Your Interface</title>
+    <meta name="description" content="Choose your interface to view Marius Biegger's CV."/>
     <meta name="author" content="Marius Biegger" />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
         :root {
-            --background: #1a1b26;
-            --foreground: #c0caf5;
-            --accent: #7aa2f7;
-            --button-bg: #292e42;
-            --button-hover-bg: #3b4261;
+            --tech-bg: #1a1b26;
+            --tech-fg: #c0caf5;
+            --tech-accent: #7aa2f7;
+            --tech-button-bg: #292e42;
+            --tech-button-hover-bg: #3b4261;
+
+            --pixel-bg: #d1d5db;
+            --pixel-fg: #374151;
+            --pixel-border: #6b7280;
+            --pixel-shadow: #4b5563;
+            --pixel-button-bg: #f3f4f6;
+
+            --transition-speed: 0.4s;
         }
+
         html, body {
             height: 100%;
+            width: 100%;
             margin: 0;
             padding: 0;
+            overflow: hidden; /* Prevent scrollbars from animations */
+        }
+
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--background);
-            color: var(--foreground);
-            font-family: 'Fira Mono', monospace;
             text-align: center;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
+
+        /* Tech Theme (Default) */
+        body.tech-theme {
+            background-color: var(--tech-bg);
+            color: var(--tech-fg);
+            font-family: 'Fira Mono', monospace;
+        }
+
+        /* Pixel Theme */
+        body.pixel-theme {
+            background-color: var(--pixel-bg);
+            color: var(--pixel-fg);
+            font-family: 'VT323', monospace;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+        }
+
+        #tech-animation-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+        body.tech-theme #tech-animation-bg {
+            opacity: 0.2;
+        }
+
         .container {
             max-width: 600px;
             padding: 20px;
+            position: relative;
+            z-index: 10;
         }
+
         h1 {
-            color: var(--accent);
             margin-bottom: 40px;
+            font-size: 2em;
+            transition: color var(--transition-speed);
         }
-        .button-container {
+        body.tech-theme h1 { color: var(--tech-accent); }
+        body.pixel-theme h1 {
+            font-family: 'VT323', monospace; /* Using VT323 for consistency */
+            font-size: 2.5em;
+            color: var(--pixel-fg);
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-container {
             display: flex;
-            gap: 20px;
             justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
         }
-        .button {
-            background-color: var(--button-bg);
-            color: var(--foreground);
-            border: 2px solid var(--accent);
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 16px;
-            font-family: inherit;
+
+        .toggle-label {
+            width: 110px; /* Fixed width for symmetry */
+            padding: 0 15px;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: color var(--transition-speed);
+            line-height: 38px; /* Aligns text vertically with the slider */
+        }
+        #normie-label {
+            text-align: right;
+        }
+        #techie-label {
+            text-align: left;
+        }
+        body.pixel-theme .toggle-label { font-size: 1.5em; }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            transition: var(--transition-speed);
+        }
+        body.tech-theme .slider {
+            background-color: var(--tech-button-bg);
+            border: 2px solid var(--tech-accent);
+            border-radius: 34px;
+        }
+        body.pixel-theme .slider {
+            background-color: var(--pixel-button-bg);
+            border: 2px solid var(--pixel-border);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px; width: 22px;
+            left: 4px; bottom: 4px;
+            transition: var(--transition-speed);
+        }
+        body.tech-theme .slider:before {
+            background-color: var(--tech-accent);
+            border-radius: 50%;
+        }
+        body.pixel-theme .slider:before {
+            background-color: var(--pixel-fg);
+        }
+
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        .enter-button-wrapper {
+            position: relative;
+        }
+
+        .enter-button {
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color var(--transition-speed), color var(--transition-speed), border var(--transition-speed);
+            text-transform: uppercase;
+            display: inline-block; /* Important for positioning context */
+        }
+
+        body.tech-theme .enter-button {
+            background-color: var(--tech-button-bg);
+            color: var(--tech-fg);
+            border: 2px solid var(--tech-accent);
             border-radius: 5px;
         }
-        .button:hover {
-            background-color: var(--button-hover-bg);
+        body.tech-theme .enter-button:hover {
+            background-color: var(--tech-button-hover-bg);
             transform: translateY(-3px);
         }
-        .button-primary {
-            background-color: var(--accent);
-            color: var(--background);
+
+        body.pixel-theme .enter-button {
+            font-family: 'VT323', monospace;
+            font-size: 24px;
+            background-color: var(--pixel-button-bg);
+            color: var(--pixel-fg);
+            border: 2px solid var(--pixel-border);
+            box-shadow: 4px 4px 0px var(--pixel-shadow);
         }
-        .button-primary:hover {
-            background-color: #9abef7;
+        body.pixel-theme .enter-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--pixel-shadow);
         }
+
+
         footer {
             position: absolute;
             bottom: 20px;
             font-size: 14px;
+            z-index: 20;
         }
         footer a {
-            color: var(--foreground);
             text-decoration: none;
+            transition: color var(--transition-speed);
         }
-        footer a:hover {
-            text-decoration: underline;
-        }
+        body.tech-theme footer a { color: var(--tech-fg); }
+        body.pixel-theme footer a { color: var(--pixel-fg); }
     </style>
 </head>
 <body>
+    <canvas id="tech-animation-bg"></canvas>
+
     <div class="container">
-        <h1>Choose Your Path</h1>
-        <div class="button-container">
-            <a href="cv.html" class="button">HR</a>
-            <a href="terminal.html" class="button">Geek</a>
+        <h1>Choose Your Interface</h1>
+        <div class="toggle-container">
+            <span class="toggle-label" id="normie-label">Normie</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-label" id="techie-label">Techie</span>
+        </div>
+        <div class="enter-button-wrapper">
+            <a href="#" id="enter-btn" class="enter-button">Enter</a>
         </div>
     </div>
     <footer>
         <a href="impressum.html">Impressum</a>
     </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const enterBtn = document.getElementById('enter-btn');
+        const body = document.body;
+        const canvas = document.getElementById('tech-animation-bg');
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+
+        function setupCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function runTechAnimation() {
+            setupCanvas();
+            const cols = Math.floor(canvas.width / 20);
+            const drops = Array(cols).fill(1);
+            const chars = "MATRIX".split('');
+
+            function draw() {
+                ctx.fillStyle = 'rgba(26, 27, 38, 0.1)'; // Fading effect
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = getComputedStyle(body).getPropertyValue('--tech-accent').trim();
+                ctx.font = '15px Fira Mono';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            function animate() {
+                draw();
+                animationFrameId = requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        function stopTechAnimation() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function setTheme(isNormie) {
+            if (isNormie) {
+                body.classList.remove('tech-theme');
+                body.classList.add('pixel-theme');
+                enterBtn.href = 'cv.html';
+                stopTechAnimation();
+                themeToggle.checked = false; // Ensure slider is on the left for Normie
+            } else {
+                body.classList.remove('pixel-theme');
+                body.classList.add('tech-theme');
+                enterBtn.href = 'terminal.html';
+                runTechAnimation();
+                themeToggle.checked = true; // Ensure slider is on the right for Techie
+            }
+        }
+
+        themeToggle.addEventListener('change', () => {
+            setTheme(!themeToggle.checked); // Invert logic: checked means Techie (right), unchecked means Normie (left)
+        });
+
+        window.addEventListener('resize', () => {
+            if (body.classList.contains('tech-theme')) {
+                stopTechAnimation();
+                runTechAnimation();
+            }
+        });
+
+        // Set initial theme to Normie (pixel theme)
+        setTheme(true);
+    </script>
 </body>
 </html>
