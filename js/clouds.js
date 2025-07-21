@@ -38,13 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         clouds.push({ el: cloudEl, speed: layer.speed, parallaxFactor: layer.parallaxFactor, initialLeft: parseFloat(cloudEl.style.left) });
     }
 
-    // Create 5 clouds for the back layer (index 0)
-    for (let i = 0; i < 5; i++) {
+    // Create 3 clouds for the back layer (index 0)
+    for (let i = 0; i < 3; i++) {
         createCloud(0);
     }
 
     // Create 2 clouds for the foreground layer (index 1)
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
         createCloud(1);
     }
 
