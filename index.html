@@ -22,6 +22,12 @@
             --pixel-shadow: #4b5563;
             --pixel-button-bg: #f3f4f6;
 
+            --simple-bg: #fff;
+            --simple-fg: #333;
+            --simple-accent: #0066cc;
+            --simple-button-bg: #f0f0f0;
+            --simple-button-hover-bg: #e0e0e0;
+
             --transition-speed: 0.4s;
         }
 
@@ -56,6 +62,13 @@
             image-rendering: pixelated;
             image-rendering: -moz-crisp-edges;
             image-rendering: -webkit-crisp-edges;
+        }
+
+        /* Simple Theme */
+        body.simple-theme {
+            background-color: var(--simple-bg);
+            color: var(--simple-fg);
+            font-family: monospace;
         }
 
         #cloud-container {
@@ -110,6 +123,10 @@
             color: var(--pixel-fg);
             text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
         }
+        body.simple-theme h1 { 
+            color: var(--simple-fg);
+            font-family: monospace;
+        }
 
         .toggle-container {
             display: flex;
@@ -134,46 +151,57 @@
         }
         body.pixel-theme .toggle-label { font-size: 1.5em; }
 
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
+        .theme-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
         }
-        .toggle-switch input { opacity: 0; width: 0; height: 0; }
 
-        .slider {
-            position: absolute;
+        .theme-option {
+            padding: 12px 24px;
+            border: none;
             cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            transition: var(--transition-speed);
+            font-size: 16px;
+            transition: all var(--transition-speed);
+            text-transform: uppercase;
+            font-family: inherit;
         }
-        body.tech-theme .slider {
+
+        body.tech-theme .theme-option {
             background-color: var(--tech-button-bg);
+            color: var(--tech-fg);
             border: 2px solid var(--tech-accent);
-            border-radius: 34px;
+            border-radius: 5px;
         }
-        body.pixel-theme .slider {
+        body.tech-theme .theme-option:hover,
+        body.tech-theme .theme-option.active {
+            background-color: var(--tech-button-hover-bg);
+        }
+
+        body.pixel-theme .theme-option {
+            font-family: 'VT323', monospace;
+            font-size: 20px;
             background-color: var(--pixel-button-bg);
+            color: var(--pixel-fg);
             border: 2px solid var(--pixel-border);
+            box-shadow: 2px 2px 0px var(--pixel-shadow);
+        }
+        body.pixel-theme .theme-option:hover,
+        body.pixel-theme .theme-option.active {
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px var(--pixel-shadow);
         }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 22px; width: 22px;
-            left: 4px; bottom: 4px;
-            transition: var(--transition-speed);
+        body.simple-theme .theme-option {
+            background-color: var(--simple-button-bg);
+            color: var(--simple-fg);
+            border: 1px solid #ccc;
         }
-        body.tech-theme .slider:before {
-            background-color: var(--tech-accent);
-            border-radius: 50%;
+        body.simple-theme .theme-option:hover,
+        body.simple-theme .theme-option.active {
+            background-color: var(--simple-button-hover-bg);
         }
-        body.pixel-theme .slider:before {
-            background-color: var(--pixel-fg);
-        }
-
-        input:checked + .slider:before { transform: translateX(26px); }
 
         .enter-button-wrapper {
             position: relative;
@@ -213,6 +241,18 @@
             box-shadow: 6px 6px 0px var(--pixel-shadow);
         }
 
+        body.simple-theme .enter-button {
+            font-family: monospace;
+            font-size: 18px;
+            background-color: var(--simple-button-bg);
+            color: var(--simple-fg);
+            border: 1px solid #ccc;
+        }
+        body.simple-theme .enter-button:hover {
+            background-color: var(--simple-button-hover-bg);
+            transform: translateY(-2px);
+        }
+
 
         footer {
             position: absolute;
@@ -226,6 +266,7 @@
         }
         body.tech-theme footer a { color: var(--tech-fg); }
         body.pixel-theme footer a { color: var(--pixel-fg); }
+        body.simple-theme footer a { color: var(--simple-fg); }
     </style>
 </head>
 <body>
@@ -234,16 +275,13 @@
 
     <div class="container">
         <h1>Choose Your Interface</h1>
-        <div class="toggle-container">
-            <span class="toggle-label" id="normie-label">Normie</span>
-            <label class="toggle-switch">
-                <input type="checkbox" id="theme-toggle">
-                <span class="slider"></span>
-            </label>
-            <span class="toggle-label" id="techie-label">Techie</span>
+        <div class="theme-selector">
+            <button class="theme-option" data-theme="simple">Simple</button>
+            <button class="theme-option" data-theme="pixel">Pixel</button>
+            <button class="theme-option active" data-theme="tech">Tech</button>
         </div>
         <div class="enter-button-wrapper">
-            <a href="#" id="enter-btn" class="enter-button">Enter</a>
+            <a href="terminal/" id="enter-btn" class="enter-button">Enter</a>
         </div>
     </div>
     <footer>
@@ -251,12 +289,12 @@
     </footer>
 
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
         const enterBtn = document.getElementById('enter-btn');
         const body = document.body;
         const canvas = document.getElementById('tech-animation-bg');
         const ctx = canvas.getContext('2d');
         let animationFrameId;
+        let currentTheme = 'tech';
 
         function setupCanvas() {
             canvas.width = window.innerWidth;
@@ -325,9 +363,24 @@
             }
         }
 
-        function setTheme(isNormie) {
-            if (isNormie) {
-                body.classList.remove('tech-theme');
+        function setTheme(theme) {
+            // Remove all theme classes
+            body.classList.remove('tech-theme', 'pixel-theme', 'simple-theme');
+            
+            // Update button states
+            document.querySelectorAll('.theme-option').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-theme="${theme}"]`).classList.add('active');
+            
+            currentTheme = theme;
+            
+            if (theme === 'simple') {
+                body.classList.add('simple-theme');
+                enterBtn.href = 'simple.html';
+                stopTechAnimation();
+                unloadScript('clouds-script');
+            } else if (theme === 'pixel') {
                 body.classList.add('pixel-theme');
                 enterBtn.href = 'cv/';
                 stopTechAnimation();
@@ -336,19 +389,19 @@
                     console.log('clouds.js loaded, initializing clouds');
                     window.initClouds();
                 }).catch(e => console.error('Error loading clouds.js:', e));
-                themeToggle.checked = false; // Ensure slider is on the left for Normie
-            } else {
-                body.classList.remove('pixel-theme');
+            } else if (theme === 'tech') {
                 body.classList.add('tech-theme');
                 enterBtn.href = 'terminal/';
                 runTechAnimation();
                 unloadScript('clouds-script');
-                themeToggle.checked = true; // Ensure slider is on the right for Techie
             }
         }
 
-        themeToggle.addEventListener('change', () => {
-            setTheme(!themeToggle.checked); // Invert logic: checked means Techie (right), unchecked means Normie (left)
+        // Add event listeners to theme buttons
+        document.querySelectorAll('.theme-option').forEach(button => {
+            button.addEventListener('click', () => {
+                setTheme(button.dataset.theme);
+            });
         });
 
         window.addEventListener('resize', () => {
@@ -358,9 +411,9 @@
             }
         });
 
-                // Set initial theme to Normie (pixel theme)
+        // Set initial theme to Tech
         document.addEventListener('DOMContentLoaded', () => {
-            setTheme(true);
+            setTheme('tech');
         });
     </script>
 </body>
