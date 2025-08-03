@@ -1,80 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Impressum - bieggerm.com</title>
-    <meta name="description"
-        content="Legal information and contact details for bieggerm.com according to German law (TMG).">
+    <meta name="description" content="Legal information and contact details for bieggerm.com according to German law (TMG).">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="https://bieggerm.com/impressum.html">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bieggerm.com/impressum.html">
-    <meta property="og:title" content="Impressum - bieggerm.com">
-    <meta property="og:description"
-        content="Legal information and contact details for bieggerm.com according to German law (TMG).">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://bieggerm.com/impressum.html">
-    <meta property="twitter:title" content="Impressum - bieggerm.com">
-    <meta property="twitter:description"
-        content="Legal information and contact details for bieggerm.com according to German law (TMG).">
     <style>
+        :root {
+            --bg: #ffffff;
+            --fg: #222222;
+            --muted: #999999;
+            --rule: #dddddd;
+            --link: #0b5bd3;
+            --link-visited: #5a35a3;
+            --focus: #ffbf47;
+            --maxw: 46rem;
+            --base: 16px;
+            --lh: 1.65;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.5rem;
+            --space-6: 2rem;
+            --radius: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0e0e0f;
+                --fg: #e5e5e5;
+                --muted: #9aa0a6;
+                --rule: #2a2a2a;
+                --link: #6ea8ff;
+                --link-visited: #b199ff;
+                --focus: #ffbf47;
+            }
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
         body {
-            font-family: monospace;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            line-height: 1.6;
-            background: #fff;
-            color: #333;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: var(--base);
+            line-height: var(--lh);
+            max-width: var(--maxw);
+            margin: 8vh auto;
+            padding: 0 var(--space-4);
+            background: var(--bg);
+            color: var(--fg);
+        }
+
+        header {
+            margin-bottom: var(--space-6);
         }
 
         h1 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            margin: 0 0 var(--space-3);
+            padding-bottom: var(--space-3);
+            border-bottom: 2px solid var(--fg);
+        }
+
+        main p {
+            margin: 0 0 var(--space-4);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 var(--space-6);
+        }
+
+        nav li + li {
+            margin-top: var(--space-3);
         }
 
         a {
-            color: #0066cc;
+            color: var(--link);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
+        }
+
+        a:visited {
+            color: var(--link-visited);
         }
 
         a:hover {
             text-decoration: underline;
         }
 
+        :where(a, button, [tabindex]:not([tabindex="-1"])):focus {
+            outline: 2px dashed var(--focus);
+            outline-offset: 3px;
+            border-radius: var(--radius);
+        }
+
+        .arrow {
+            display: inline-block;
+            width: 1.25em;
+            color: var(--muted);
+        }
+
+        address {
+            font-style: normal;
+        }
+
         .footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #ccc;
-            font-size: 0.9em;
+            margin-top: var(--space-6);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--rule);
+            font-size: 0.95em;
+            color: var(--muted);
+        }
+
+        .footer a {
+            font-weight: 600;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: var(--space-1) 0;
+                display: inline-block;
+            }
+            nav li + li {
+                margin-top: var(--space-4);
+            }
+        }
+
+        @media print {
+            :root {
+                --bg: #ffffff;
+                --fg: #000000;
+                --rule: #000000;
+                --link: #000000;
+                --link-visited: #000000;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 12pt;
+            }
+            a::after {
+                content: " (" attr(href) ")";
+                font-weight: normal;
+            }
         }
     </style>
 </head>
-
 <body>
-    <h1>Impressum</h1>
+    <header>
+        <h1>Impressum</h1>
+    </header>
 
-    <p>Information according to § 5 TMG:</p>
+    <main>
+        <p>Information according to § 5 TMG:</p>
 
-    <p>
-        Marius Biegger<br>
-        Franz-Liszt-Straße 18<br>
-        85057 Ingolstadt<br>
-    </p>
+        <p>
+            Marius Biegger<br>
+            Franz-Liszt-Straße 18<br>
+            85057 Ingolstadt<br>
+        </p>
 
-    <p>Contact:</p>
-    <p>mail (at) bieggerm (dot) com</p>
+        <p>Contact:</p>
+        <address>mail (at) bieggerm (dot) com</address>
 
-    <div class="footer">
-        <p><a href="/">← Back to main page</a></p>
-    </div>
+        <div class="footer">
+            <p><a href="/">← Back to main page</a></p>
+        </div>
+    </main>
 </body>
-
 </html>
