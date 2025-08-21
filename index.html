@@ -203,110 +203,13 @@
             }
         }
 
-        /* Sticky navigation for alternate CV versions */
-        .alternate-cv-nav {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--bg);
-            border: 1px solid var(--rule);
-            border-radius: var(--radius);
-            padding: var(--space-2);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 100;
-            font-size: 0.9em;
-        }
 
-        .alternate-cv-nav a {
-            display: block;
-            margin: var(--space-1) 0;
-            font-weight: normal;
-        }
-
-        .alternate-cv-nav .snarky-note {
-            color: var(--muted);
-            font-style: italic;
-            margin-bottom: var(--space-2);
-            display: block;
-        }
-
-        /* Mobile styles for expandable menu */
-        @media (max-width: 600px) {
-            .alternate-cv-nav {
-                top: 10px;
-                right: 10px;
-                padding: var(--space-2);
-                font-size: 0.9em;
-                width: auto;
-            }
-
-            .alternate-cv-nav .snarky-note {
-                display: none;
-            }
-            
-            .menu-content.show .snarky-note {
-                display: block;
-                margin-bottom: var(--space-2);
-            }
-
-            .menu-toggle {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--fg);
-                font-size: 1.2em;
-                cursor: pointer;
-                padding: 0;
-                margin: 0;
-                width: 30px;
-                height: 30px;
-                text-align: center;
-                line-height: 1;
-            }
-
-            .menu-content {
-                display: none;
-                margin-top: var(--space-2);
-                min-width: 150px;
-            }
-
-            .menu-content a {
-                display: block;
-                margin: var(--space-2) 0;
-            }
-
-            .menu-content.show {
-                display: block;
-            }
-        }
-
-        /* Desktop styles */
-        @media (min-width: 601px) {
-            .menu-toggle {
-                display: none;
-            }
-            
-            .menu-content {
-                display: block !important;
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <h1>Marius Biegger</h1>
     </header>
-
-    <!-- Alternate CV versions navigation -->
-    <nav class="alternate-cv-nav">
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">≡</button>
-        <div class="menu-content" id="menuContent">
-            <span class="snarky-note">I don't even know why I built so many...</span>
-            <a href="/pixel">Pixel Version</a>
-            <a href="/terminal">Terminal Version</a>
-        </div>
-    </nav>
-
     <main>
         <div class="contact-info">
             <p>Ingolstadt, Germany</p>
